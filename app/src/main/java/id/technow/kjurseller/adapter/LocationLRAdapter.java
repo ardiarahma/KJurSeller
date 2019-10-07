@@ -9,18 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import id.technow.kjurseller.ProductLiveReportActivity;
+import id.technow.kjurseller.R;
+import id.technow.kjurseller.model.LocationToday;
+
 import java.util.List;
 
-import id.technow.kjurseller.ProductOpenStoreActivity;
-import id.technow.kjurseller.R;
-import id.technow.kjurseller.model.Location;
+public class LocationLRAdapter extends RecyclerView.Adapter<LocationLRAdapter.CustomViewHolder> {
 
-public class LocationOSAdapter extends RecyclerView.Adapter<LocationOSAdapter.CustomViewHolder> {
+    List<LocationToday> locationTodays;
 
-    List<Location> locations;
-
-    public LocationOSAdapter(List<Location> locations) {
-        this.locations = locations;
+    public LocationLRAdapter(List<LocationToday> locationTodays) {
+        this.locationTodays = locationTodays;
     }
 
     @Override
@@ -33,15 +33,14 @@ public class LocationOSAdapter extends RecyclerView.Adapter<LocationOSAdapter.Cu
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        Location location = locations.get(position);
-        holder.txtLocName.setText(location.getNama());
-        //holder.txtLocDesc.setText();
-        holder.id = locations.get(position).getId();
+        LocationToday locationToday = locationTodays.get(position);
+        holder.txtLocName.setText(locationToday.getNama());
+        holder.id = locationTodays.get(position).getId();
     }
 
     @Override
     public int getItemCount() {
-        return locations.size();
+        return locationTodays.size();
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,15 +55,15 @@ public class LocationOSAdapter extends RecyclerView.Adapter<LocationOSAdapter.Cu
         }
 
         public void onClick(View v) {
-            Intent intent = new Intent(itemView.getContext(), ProductOpenStoreActivity.class);
-            intent.putExtra("locAllId", id);
+            Intent intent = new Intent(itemView.getContext(), ProductLiveReportActivity.class);
+            intent.putExtra("locTodayId", id);
             itemView.getContext().startActivity(intent);
         }
     }
 
-    public void refreshEvents(List<Location> locations) {
-        this.locations.clear();
-        this.locations.addAll(locations);
+    public void refreshEvents(List<LocationToday> locationTodays) {
+        this.locationTodays.clear();
+        this.locationTodays.addAll(locationTodays);
         notifyDataSetChanged();
     }
 }

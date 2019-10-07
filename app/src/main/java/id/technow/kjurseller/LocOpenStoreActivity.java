@@ -28,7 +28,7 @@ public class LocOpenStoreActivity extends AppCompatActivity {
     private ArrayList<Location> locationList;
     private RecyclerView recyclerView;
     private LocationOSAdapter lAdapter;
-    private SwipeRefreshLayout swipeContainer;
+    private SwipeRefreshLayout swipeRefresh;
     ProgressDialog loading;
 
     @Override
@@ -45,8 +45,8 @@ public class LocOpenStoreActivity extends AppCompatActivity {
             }
         });
 
-        swipeContainer = findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = findViewById(R.id.swipeContainer);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (lAdapter != null) {
@@ -90,13 +90,13 @@ public class LocOpenStoreActivity extends AppCompatActivity {
                         recyclerView.setAdapter(lAdapter);
                     }
                 }
-                swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<LocationResponse> call, Throwable t) {
                 loading.dismiss();
-                swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
                 Toast.makeText(LocOpenStoreActivity.this, "Something wrong. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG","Response = "+t.toString());
             }

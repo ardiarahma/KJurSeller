@@ -30,7 +30,7 @@ public class ProductOpenStoreActivity extends AppCompatActivity {
     private ArrayList<ProductAll> productOpenStoreList;
     private RecyclerView recyclerView;
     private ProductOSAdapter pAdapter;
-    private SwipeRefreshLayout swipeContainer;
+    private SwipeRefreshLayout swipeRefresh;
     ProgressDialog loading;
     Context mContext;
 
@@ -50,8 +50,8 @@ public class ProductOpenStoreActivity extends AppCompatActivity {
             }
         });
 
-        swipeContainer = findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (pAdapter != null) {
@@ -97,13 +97,13 @@ public class ProductOpenStoreActivity extends AppCompatActivity {
                         //Do something
                     }
                 }
-                swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<ProductListAllResponse> call, Throwable t) {
                 loading.dismiss();
-                swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
                 Toast.makeText(ProductOpenStoreActivity.this, "Something wrong. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "Response = " + t.toString());
             }
