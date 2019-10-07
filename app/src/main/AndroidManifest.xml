@@ -28,7 +28,10 @@
         <activity android:name=".ReportActivity" />
         <activity android:name=".LocCloseStoreActivity" />
         <activity android:name=".LocLiveReportActivity" />
-        <activity android:name=".LocUpdateStockActivity"></activity>
+        <activity android:name=".LocUpdateStockActivity" />
+        <activity android:name=".ProductLiveReportActivity" />
+        <activity android:name=".ProductUpdateStockActivity" />
+        <activity android:name=".ProductCloseStoreActivity"></activity>
     </application>
 
 </manifest>

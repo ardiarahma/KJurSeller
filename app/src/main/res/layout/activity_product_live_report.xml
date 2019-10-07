@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="id.technow.kjurseller.LocLiveReportActivity">
+    tools:context="id.technow.kjurseller.ProductLiveReportActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -17,5 +17,4 @@
             layout="@layout/toolbar_live_report" />
 
     </android.support.design.widget.AppBarLayout>
-
 </LinearLayout>
