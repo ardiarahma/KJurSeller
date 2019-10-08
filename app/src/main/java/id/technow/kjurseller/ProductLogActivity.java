@@ -11,31 +11,32 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import id.technow.kjurseller.adapter.ProductLRAdapter;
+import id.technow.kjurseller.adapter.ProductLogAdapter;
 import id.technow.kjurseller.api.RetrofitClient;
-import id.technow.kjurseller.model.ProductListTodayResponse;
-import id.technow.kjurseller.model.ProductToday;
+import id.technow.kjurseller.model.ProductLogHistory;
+import id.technow.kjurseller.model.ProductLogResponse;
 import id.technow.kjurseller.model.User;
 import id.technow.kjurseller.storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductLiveReportActivity extends AppCompatActivity {
-    private ArrayList<ProductToday> productLiveReportList;
+public class ProductLogActivity extends AppCompatActivity {
+    private ArrayList<ProductLogHistory> productLogHistoryList;
     private RecyclerView recyclerView;
-    private ProductLRAdapter pAdapter;
+    private ProductLogAdapter plAdapter;
+    private TextView tvProductName, tvProductStockNow;
     private SwipeRefreshLayout swipeRefresh;
     ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_live_report);
+        setContentView(R.layout.activity_product_log);
 
         ImageButton btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -46,53 +47,53 @@ public class ProductLiveReportActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.listProduct);
+        tvProductName = findViewById(R.id.txtProductName);
+        tvProductStockNow = findViewById(R.id.txtProductStockNow);
 
         swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (pAdapter != null) {
-                    pAdapter.refreshEvents(productLiveReportList);
-                }
-                productList();
+                productLog();
             }
         });
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
-        loading = ProgressDialog.show(ProductLiveReportActivity.this, null, getString(R.string.please_wait), true, false);
-        productList();
+        loading = ProgressDialog.show(ProductLogActivity.this, null, getString(R.string.please_wait), true, false);
+        productLog();
     }
 
-    private void productList() {
+    private void productLog() {
         Intent intent = getIntent();
-        int locTodayId = intent.getIntExtra("locTodayId", 0);
+        String productId = intent.getStringExtra("productId");
 
         User user = SharedPrefManager.getInstance(this).getUser();
         String token = user.getToken();
-        Call<ProductListTodayResponse> call = RetrofitClient
+        Call<ProductLogResponse> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .productListToday("Bearer " + token, locTodayId);
+                .productLog("Bearer " + token, productId);
 
-        call.enqueue(new Callback<ProductListTodayResponse>() {
+        call.enqueue(new Callback<ProductLogResponse>() {
 
             @Override
-            public void onResponse(Call<ProductListTodayResponse> call, Response<ProductListTodayResponse> response) {
+            public void onResponse(Call<ProductLogResponse> call, Response<ProductLogResponse> response) {
                 loading.dismiss();
                 if (response.isSuccessful()) {
-                    ProductListTodayResponse productListTodayResponse = response.body();
-                    if (productListTodayResponse.getStatus().equals("success")) {
-                        productLiveReportList = productListTodayResponse.getProduct();
-                        pAdapter = new ProductLRAdapter(productLiveReportList);
+                    ProductLogResponse productLogResponse = response.body();
+                    if (productLogResponse.getStatus().equals("success")) {
+                        tvProductName.setText(productLogResponse.getProductLogStock().getProductName());
+                        tvProductStockNow.setText(String.valueOf(productLogResponse.getProductLogStock().getProductStock()));
+                        productLogHistoryList = productLogResponse.getProductLogHistory();
+                        recyclerView = (RecyclerView) findViewById(R.id.listProductLog);
+                        plAdapter = new ProductLogAdapter(productLogHistoryList);
                         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(eLayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(pAdapter);
+                        recyclerView.setAdapter(plAdapter);
                         if (eLayoutManager.getItemCount() == 0) {
                             //Do something
                         }
@@ -102,10 +103,9 @@ public class ProductLiveReportActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductListTodayResponse> call, Throwable t) {
+            public void onFailure(Call<ProductLogResponse> call, Throwable t) {
                 loading.dismiss();
                 swipeRefresh.setRefreshing(false);
-                Toast.makeText(ProductLiveReportActivity.this, "Something wrong. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "Response = " + t.toString());
             }
         });

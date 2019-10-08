@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,9 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +33,9 @@
         <activity android:name=".LocUpdateStockActivity" />
         <activity android:name=".ProductLiveReportActivity" />
         <activity android:name=".ProductUpdateStockActivity" />
-        <activity android:name=".ProductCloseStoreActivity"></activity>
+        <activity android:name=".ProductCloseStoreActivity" />
+        <activity android:name=".ProductLogActivity" />
+        <activity android:name=".VerifyEmailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_8sdp"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_weight="0.4"
+        android:baselineAligned="false"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="@dimen/_160sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:background="@color/light_grey" />
+
+            <ImageView
+                android:id="@+id/imgLiveReport"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/ic_product_log"
+                android:tint="@color/colorPrimary" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Sold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/txtDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="2019-03-17 10:10:10"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Log ID :"
+            android:textColor="@color/dark_slate_gray"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/txtRef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="123456789"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="@dimen/_12ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Old Stock"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:fontFamily="@font/roboto_medium"
+                android:text=":"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:id="@+id/txtOldStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.55"
+                android:fontFamily="@font/roboto_regular"
+                android:text="20"
+                android:textColor="@color/dim_gray"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Stock Change"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:fontFamily="@font/roboto_medium"
+                android:text=":"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:id="@+id/txtChangeStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.55"
+                android:fontFamily="@font/roboto_regular"
+                android:text="5"
+                android:textColor="@color/dim_gray"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/roboto_medium"
+                android:text="New Stock"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:fontFamily="@font/roboto_medium"
+                android:text=":"
+                android:textColor="@color/dark_slate_gray"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:id="@+id/txtNewStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.55"
+                android:fontFamily="@font/roboto_regular"
+                android:text="25"
+                android:textColor="@color/dim_gray"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
