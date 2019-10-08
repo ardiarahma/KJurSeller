@@ -11,7 +11,7 @@ public class RetrofitClient {
     //private static final String BASE_URL_API = "http://10.33.35.204/k-jur/public/api/penjual/";
     //private static final String BASE_URL_API = "http://10.0.2.2:8000/api/penjual/";
     //private static final String BASE_URL_API = "http://k-jur.apotech.id/api/penjual/";
-    private static final String BASE_URL_API = "http://10.33.88.50/kajur/public/api/penjual/";
+    private static final String BASE_URL_API = "http://k-jur.technow.id/api/penjual/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 

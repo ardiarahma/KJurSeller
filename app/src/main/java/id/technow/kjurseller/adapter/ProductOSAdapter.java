@@ -69,7 +69,7 @@ public class ProductOSAdapter extends RecyclerView.Adapter<ProductOSAdapter.Cust
                     .load(product.getProductPic())
                     //.placeholder(R.drawable.ic_snack)
                     .error(R.drawable.ic_close)
-                    .fit()
+                   // .fit()
                     .resize(500, 500)
                     .centerInside()
                     // To prevent fade animation

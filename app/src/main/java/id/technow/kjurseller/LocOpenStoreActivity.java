@@ -45,8 +45,8 @@ public class LocOpenStoreActivity extends AppCompatActivity {
             }
         });
 
-        swipeRefresh = findViewById(R.id.swipeContainer);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      /*  swipeRefresh = findViewById(R.id.swipeContainer);
+        //swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (lAdapter != null) {
@@ -54,7 +54,7 @@ public class LocOpenStoreActivity extends AppCompatActivity {
                 }
                 locAll();
             }
-        });
+        });*/
     }
 
     @Override
@@ -90,13 +90,13 @@ public class LocOpenStoreActivity extends AppCompatActivity {
                         recyclerView.setAdapter(lAdapter);
                     }
                 }
-                swipeRefresh.setRefreshing(false);
+                //swipeRefresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<LocationResponse> call, Throwable t) {
                 loading.dismiss();
-                swipeRefresh.setRefreshing(false);
+                //swipeRefresh.setRefreshing(false);
                 Toast.makeText(LocOpenStoreActivity.this, "Something wrong. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG","Response = "+t.toString());
             }
