@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="id.technow.kjurseller.WithdrawActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_withdraw" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/light_grey"
+        android:elevation="@dimen/_2sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_9sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/bank_info"
+        android:textColor="@color/dim_gray"
+        android:textSize="@dimen/_13ssp" />
+
+    <LinearLayout
+        android:id="@+id/layoutBankInfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_185sdp"
+        android:layout_margin="@dimen/_6sdp"
+        android:clickable="true"
+        android:elevation="@dimen/_2sdp"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_bankcard"
+            android:gravity="center|end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNoInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/no_info"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp" />
+
+            <TextView
+                android:id="@+id/txtHolderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtHolderBankNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_21ssp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/tap_to_edit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/balance"
+        android:textColor="@color/dim_gray"
+        android:textSize="@dimen/_13ssp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="Rp"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/txtBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="0"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="@dimen/_22ssp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/withdraw_amount"
+        android:textSize="@dimen/_12ssp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_9sdp"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="Rp"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_14ssp" />
+
+        <EditText
+            android:id="@+id/edtAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnWithdraw"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:background="@drawable/btn_rounded_primary"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/withdraw"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp" />
+
+</LinearLayout>

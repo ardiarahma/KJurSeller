@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,9 @@
         <activity android:name=".ProductUpdateStockActivity" />
         <activity android:name=".ProductCloseStoreActivity" />
         <activity android:name=".ProductLogActivity" />
-        <activity android:name=".VerifyEmailActivity"></activity>
+        <activity android:name=".VerifyEmailActivity" />
+        <activity android:name=".WithdrawActivity" />
+        <activity android:name=".WalletActivity"></activity>
     </application>
 
 </manifest>

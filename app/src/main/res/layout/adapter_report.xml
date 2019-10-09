@@ -38,7 +38,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="end"
-                    android:text="2018-03-25"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10ssp" />
 
@@ -47,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="Pastel"
+                    android:text="Product"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
@@ -81,7 +80,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="12345"
                         android:textColor="@color/dim_gray"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
@@ -116,7 +114,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="HY"
                         android:textColor="@color/dim_gray"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
@@ -151,7 +148,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="HY"
                         android:textColor="@color/dim_gray"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
