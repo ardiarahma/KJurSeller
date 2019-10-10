@@ -10,9 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="@dimen/_3sdp"
         android:baselineAligned="false"
         android:orientation="vertical">
 
@@ -22,13 +20,13 @@
             android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tvRef"
+                android:id="@+id/txtRef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_bold"
+                android:fontFamily="@font/roboto_regular"
                 android:text="123456"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="14sp" />
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/_11ssp" />
 
             <View
                 android:layout_width="0dp"
@@ -36,14 +34,14 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/tvDateTime"
+                android:id="@+id/txtDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
                 android:gravity="end"
-                android:fontFamily="@font/open_sans_regular"
                 android:text="2019"
                 android:textColor="@color/gray"
-                android:textSize="14sp" />
+                android:textSize="@dimen/_10ssp" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,13 +50,13 @@
             android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tvType"
+                android:id="@+id/txtType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:text="purchase"
                 android:textColor="@color/dim_gray"
-                android:textSize="14sp" />
+                android:textSize="@dimen/_11ssp" />
 
             <View
                 android:layout_width="0dp"
@@ -66,14 +64,14 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/tvTotal"
+                android:id="@+id/txtTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
                 android:gravity="end"
-                android:fontFamily="@font/open_sans_regular"
                 android:text="- 10000"
                 android:textColor="@color/red"
-                android:textSize="14sp" />
+                android:textSize="@dimen/_11ssp" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,48 +87,48 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
                 android:text="("
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
                 android:text="@string/balance"
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
                 android:text=": "
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10ssp" />
 
             <TextView
-                android:id="@+id/tvBalance"
+                android:id="@+id/txtBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
                 android:gravity="end"
-                android:fontFamily="@font/open_sans_regular"
                 android:text="12345"
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
                 android:text=")"
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10ssp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -138,5 +136,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#d4d5d9" />
+        android:background="@color/light_grey" />
 </LinearLayout>

@@ -1,463 +1,491 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="id.technow.kjurseller.MainActivity">
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_210sdp">
+            android:layout_height="wrap_content"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbarThumbVertical="@null">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9"
-                    android:background="@color/colorAccentDark"
-                    android:orientation="vertical">
+                    android:layout_height="@dimen/_210sdp">
 
-                    <ImageView
-                        android:id="@+id/btnSettings"
-                        android:layout_width="@dimen/_23sdp"
-                        android:layout_height="@dimen/_23sdp"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.9"
+                            android:background="@color/colorAccentDark"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/btnSettings"
+                                android:layout_width="@dimen/_23sdp"
+                                android:layout_height="@dimen/_23sdp"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:src="@drawable/ic_settings"
+                                android:tint="@color/white" />
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/imgProfile"
+                                android:layout_width="@dimen/_55sdp"
+                                android:layout_height="@dimen/_55sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_launcher_background"
+                                app:civ_border_color="@color/white"
+                                app:civ_border_width="@dimen/_2sdp" />
+
+                            <TextView
+                                android:id="@+id/txtUsername"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_7sdp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="User"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <TextView
+                                android:id="@+id/txtEmail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="email@com"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_13ssp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.1"
+                            android:background="@color/white_smoke" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnBalance"
+                        android:layout_width="@dimen/_135sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/layout_rounded_gradient_primary"
                         android:clickable="true"
                         android:focusable="true"
-                        android:src="@drawable/ic_settings"
-                        android:tint="@color/white" />
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:orientation="horizontal">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="@dimen/_55sdp"
-                        android:layout_height="@dimen/_55sdp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_background"
-                        app:civ_border_color="@color/white"
-                        app:civ_border_width="@dimen/_2sdp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="0.8"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_7sdp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="User"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/balance"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
 
-                    <TextView
-                        android:id="@+id/txtEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="email@com"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_13ssp" />
-                </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:background="@color/white_smoke" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="Rp. "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_11ssp" />
 
-            </LinearLayout>
+                                <TextView
+                                    android:id="@+id/txtBalance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="99.000.000"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btnBalance"
-                android:layout_width="@dimen/_135sdp"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/layout_rounded_gradient_primary"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/btnBack"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_next"
+                            android:tint="@color/white" />
+                    </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_weight="0.8"
-                    android:gravity="center"
+                    android:background="@color/white_smoke"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/balance"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp" />
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                        <TextView
+                        <ImageView
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginStart="@dimen/_13sdp"
+                            android:src="@drawable/ic_store" />
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="Rp. "
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp" />
+                            android:layout_marginStart="@dimen/_9sdp"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/txtBalance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="99.000.000"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_13ssp" />
+                            <TextView
+                                android:id="@+id/txtStoreName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Store Name"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/txtProduct"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="0"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_3sdp"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/products"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/btnBack"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/ic_next"
-                    android:tint="@color/white" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_smoke"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginStart="@dimen/_13sdp"
-                    android:src="@drawable/ic_store" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_9sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtStoreName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="Store Name"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp" />
-
-                    <TextView
-                        android:id="@+id/txtProduct"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="10 Product"
-                        android:textColor="@color/dark_slate_gray"
-                        android:textSize="@dimen/_12ssp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/daily_sale"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <LinearLayout
-                    android:id="@+id/btnOpenStore"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_13sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/ic_store" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_9sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="@string/open_store"
+                            android:text="@string/daily_sale"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_13ssp" />
+                            android:textSize="@dimen/_14ssp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="Open your store today"
-                            android:textColor="@color/dark_slate_gray"
-                            android:textSize="@dimen/_12ssp" />
+                        <LinearLayout
+                            android:id="@+id/btnOpenStore"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_55sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_6sdp"
+                            android:paddingStart="@dimen/_13sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:src="@drawable/ic_store" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_9sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/open_store"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="Open your store today"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="@color/light_grey" />
+
+                        <LinearLayout
+                            android:id="@+id/btnLiveSales"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_55sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_6sdp"
+                            android:paddingStart="@dimen/_13sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:src="@drawable/ic_store" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_9sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/live_sales"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="Update stock and watch transaction on your store today"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="@color/light_grey" />
+
+                        <LinearLayout
+                            android:id="@+id/btnCloseStore"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_55sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_6sdp"
+                            android:paddingStart="@dimen/_13sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:src="@drawable/ic_store" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_9sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/close_store"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="Close your store today"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/light_grey" />
-
-                <LinearLayout
-                    android:id="@+id/btnLiveSales"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_13sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/ic_store" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_9sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/live_sales"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="Update stock and watch transaction on your store today"
-                            android:textColor="@color/dark_slate_gray"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/light_grey" />
-
-                <LinearLayout
-                    android:id="@+id/btnCloseStore"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_13sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/ic_store" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_9sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/close_store"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="Close your store today"
-                            android:textColor="@color/dark_slate_gray"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/report"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <LinearLayout
-                    android:id="@+id/btnReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_13sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/ic_store" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_9sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/report"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_13ssp" />
+                            android:textSize="@dimen/_14ssp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="View your transaction report"
-                            android:textColor="@color/dark_slate_gray"
-                            android:textSize="@dimen/_12ssp" />
+                        <LinearLayout
+                            android:id="@+id/btnReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_55sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_6sdp"
+                            android:paddingStart="@dimen/_13sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:src="@drawable/ic_store" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_9sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/report"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="View your transaction report"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Help"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="@dimen/_6sdp"
-                    android:paddingStart="@dimen/_13sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/ic_store" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_9sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Contact Us"
+                            android:text="Help"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_13ssp" />
+                            android:textSize="@dimen/_14ssp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="Let us know if you have a problem"
-                            android:textColor="@color/dark_slate_gray"
-                            android:textSize="@dimen/_12ssp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_55sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_6sdp"
+                            android:paddingStart="@dimen/_13sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:src="@drawable/ic_store" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_9sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Contact Us"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:text="Let us know if you have a problem"
+                                    android:textColor="@color/dark_slate_gray"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

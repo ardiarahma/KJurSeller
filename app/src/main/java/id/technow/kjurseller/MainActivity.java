@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout btnBalance, btnOpenStore, btnLiveSales, btnCloseStore, btnReport;
     private TextView txtUsername, txtEmail, txtBalance, txtStoreName, txtProduct;
     private CircleImageView imgProfile;
-
-    private SwipeRefreshLayout swipeContainer;
+    private SwipeRefreshLayout swipeRefresh;
     ProgressDialog loading;
     Context mContext;
     private static final int TIME_INTERVAL = 2000;
@@ -51,16 +50,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnBalance = findViewById(R.id.btnBalance);
-        /*
         btnBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                startActivity(new Intent(MainActivity.this, WalletActivity.class));
             }
         });
-        */
-
-        //btnReport=findViewById(R.id.btnCloseStore)
 
         btnOpenStore = findViewById(R.id.btnOpenStore);
         btnOpenStore.setOnClickListener(new View.OnClickListener() {
@@ -92,10 +87,18 @@ public class MainActivity extends AppCompatActivity {
         });
         txtUsername = findViewById(R.id.txtUsername);
         txtEmail = findViewById(R.id.txtEmail);
-        txtStoreName =findViewById(R.id.txtStoreName);
+        txtStoreName = findViewById(R.id.txtStoreName);
         txtBalance = findViewById(R.id.txtBalance);
         txtProduct = findViewById(R.id.txtProduct);
         imgProfile = findViewById(R.id.imgProfile);
+
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                detailUser();
+            }
+        });
     }
 
     @Override
@@ -146,24 +149,10 @@ public class MainActivity extends AppCompatActivity {
                     if (detailUserResponse.getStatus().equals("success")) {
                         txtEmail.setText(detailUserResponse.getDetailUser().getEmail());
                         txtUsername.setText(detailUserResponse.getDetailUser().getName());
-                        txtBalance.setText(String.valueOf( detailUserResponse.getDetailUser().getBalance()));
+                        txtBalance.setText(String.valueOf(detailUserResponse.getDetailUser().getBalance()));
                         txtStoreName.setText(detailUserResponse.getDetailUser().getDetailStore().getStoreName());
-                        txtProduct.setText(String.valueOf( detailUserResponse.getProduct())+" Product");
+                        txtProduct.setText(String.valueOf(detailUserResponse.getProduct()) + " Product");
                         Picasso.get().load(detailUserResponse.getDetailUser().getPic()).into(imgProfile);
-                      /*  tvProduct.setText(String.valueOf(detailUserResponse.getProduct()));
-                        tvLocation.setText(String.valueOf(detailUserResponse.getLocation()));
-                        String stock = String.valueOf(detailUserResponse.getStock());
-                        if (stock == null) {
-                            tvStock.setText("0");
-                        } else {
-                            tvStock.setText(stock);
-                        }
-                        String sold = String.valueOf(detailUserResponse.getSold());
-                        if (sold == null) {
-                            tvSold.setText("0");
-                        } else {
-                            tvSold.setText(sold);
-                        }*/
                     } else {
                         String emailSend = detailUserResponse.getEmail();
                       /*  Intent intent = new Intent(MainActivity.this, VerifyEmailActivity.class);
@@ -185,13 +174,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
-                //swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<DetailUserResponse> call, Throwable t) {
                 //loading.dismiss();
-                //swipeContainer.setRefreshing(false);
+                swipeRefresh.setRefreshing(false);
                 Toast.makeText(mContext, "Something wrong. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "Response = " + t.toString());
             }

@@ -3,11 +3,7 @@ package id.technow.kjurseller.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Afyad Kafa on 1/28/2019.
- */
-
-public class GamapayLog {
+public class WalletLog {
     @SerializedName("id")
     @Expose
     private String id;
@@ -44,7 +40,7 @@ public class GamapayLog {
     @Expose
     private String dateTime;
 
-    public GamapayLog(String id, int userId, String referenceId, String source, int saldoAwal, String type, int total, int grandTotal, String dateTime) {
+    public WalletLog(String id, int userId, String referenceId, String source, int saldoAwal, String type, int total, int grandTotal, String dateTime) {
         this.id = id;
         this.userId = userId;
         this.referenceId = referenceId;

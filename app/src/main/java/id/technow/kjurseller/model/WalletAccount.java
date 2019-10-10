@@ -3,11 +3,7 @@ package id.technow.kjurseller.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Afyad Kafa on 1/14/2019.
- */
-
-public class GamapayAccount {
+public class WalletAccount {
     @SerializedName("id")
     @Expose
     private int id;
@@ -28,7 +24,7 @@ public class GamapayAccount {
     @Expose
     private int balance;
 
-    public GamapayAccount(int id, String name, String email, String phoneNumber, int balance) {
+    public WalletAccount(int id, String name, String email, String phoneNumber, int balance) {
         this.id = id;
         this.name = name;
         this.email = email;

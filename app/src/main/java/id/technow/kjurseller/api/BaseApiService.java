@@ -9,7 +9,7 @@ import id.technow.kjurseller.model.DetailUserResponse;
 import id.technow.kjurseller.model.EditBankResponse;
 import id.technow.kjurseller.model.EditUserResponse;
 import id.technow.kjurseller.model.ForgotPasswordResponse;
-import id.technow.kjurseller.model.GamapayResponse;
+import id.technow.kjurseller.model.WalletResponse;
 import id.technow.kjurseller.model.LocationResponse;
 import id.technow.kjurseller.model.LocationTodayResponse;
 import id.technow.kjurseller.model.LoginResponse;
@@ -115,7 +115,7 @@ public interface BaseApiService {
             @Path("id") String id);
 
     @GET("saldo/riwayat")
-    Call<GamapayResponse> gamapay(
+    Call<WalletResponse> gamapay(
             @Header("Authorization") String authToken);
 
     @FormUrlEncoded
