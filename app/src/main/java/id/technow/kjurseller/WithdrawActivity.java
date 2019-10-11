@@ -53,7 +53,7 @@ public class WithdrawActivity extends AppCompatActivity {
         txtHolderName = findViewById(R.id.txtHolderName);
         txtHolderBankNumber = findViewById(R.id.txtHolderBankNumber);
         txtBalance = findViewById(R.id.txtBalance);
-        edtAmount = findViewById(R.id.etAmount);
+        edtAmount = findViewById(R.id.edtAmount);
         btnWithdraw = findViewById(R.id.btnWithdraw);
 
         layoutBankInfo.setOnClickListener(new View.OnClickListener() {

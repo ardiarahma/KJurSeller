@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -36,17 +37,20 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
     private EditText edtStock;
     Context mContext;
     ProgressDialog loading;
-    private BottomSheetBehavior mBottomSheetBehaviour;
+    int locTodayId;
+   private BottomSheetBehavior mBottomSheetBehaviour;
 
     @SuppressLint("RestrictedApi")
     @Override
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
 
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_new_stock, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_update_stock, null);
         dialog.setContentView(view);
 
         mContext = getActivity();
+        Intent intent = getActivity().getIntent();
+        locTodayId = intent.getIntExtra("locTodayId", 0);
 
         String productName = getArguments().getString("productName");
         String productPic = getArguments().getString("productPic");
@@ -157,7 +161,11 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
                     UpdateStockResponse updateStockResponse = response.body();
                     if (updateStockResponse.getStatus().equals("success")) {
                         Toast.makeText(mContext, "Stock added", Toast.LENGTH_LONG).show();
-                        mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        //mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        //startActivity(new Intent(getActivity(), ProductUpdateStockActivity.class));
+                        Intent intent = new Intent(getActivity(), ProductUpdateStockActivity.class);
+                        intent.putExtra("locTodayId", locTodayId);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(mContext, updateStockResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }

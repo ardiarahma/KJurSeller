@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         txtUsername.setText(detailUserResponse.getDetailUser().getName());
                         txtBalance.setText(String.valueOf(detailUserResponse.getDetailUser().getBalance()));
                         txtStoreName.setText(detailUserResponse.getDetailUser().getDetailStore().getStoreName());
-                        txtProduct.setText(String.valueOf(detailUserResponse.getProduct()) + " Product");
+                        txtProduct.setText(String.valueOf(detailUserResponse.getProduct()) );
                         Picasso.get().load(detailUserResponse.getDetailUser().getPic()).into(imgProfile);
                     } else {
                         String emailSend = detailUserResponse.getEmail();

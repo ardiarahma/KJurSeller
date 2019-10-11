@@ -42,7 +42,7 @@ public class ProductUpdateStockActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(ProductUpdateStockActivity.this, LocUpdateStockActivity.class));
             }
         });
 
@@ -61,8 +61,7 @@ public class ProductUpdateStockActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         loading = ProgressDialog.show(ProductUpdateStockActivity.this, null, getString(R.string.please_wait), true, false);
         productList();
@@ -109,5 +108,10 @@ public class ProductUpdateStockActivity extends AppCompatActivity {
                 Log.d("TAG", "Response = " + t.toString());
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ProductUpdateStockActivity.this, LocUpdateStockActivity.class));
     }
 }

@@ -92,6 +92,7 @@ public class ProductUSAdapter extends RecyclerView.Adapter<ProductUSAdapter.Cust
             bundle.putString("productName", productName);
             bundle.putInt("productStock", productStock);
             bundle.putString("productPic", productPic);
+
             FragmentUpdateStock fragment = new FragmentUpdateStock();
             fragment.setArguments(bundle);
             fragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), TAG);
