@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                         txtBalance.setText(String.valueOf(detailUserResponse.getDetailUser().getBalance()));
                         txtStoreName.setText(detailUserResponse.getDetailUser().getDetailStore().getStoreName());
                         txtProduct.setText(String.valueOf(detailUserResponse.getProduct()) );
-                        Picasso.get().load(detailUserResponse.getDetailUser().getPic()).into(imgProfile);
+                        Picasso.get().load(detailUserResponse.getDetailUser().getPic()).error(R.drawable.ic_person).into(imgProfile);
                     } else {
                         String emailSend = detailUserResponse.getEmail();
                       /*  Intent intent = new Intent(MainActivity.this, VerifyEmailActivity.class);

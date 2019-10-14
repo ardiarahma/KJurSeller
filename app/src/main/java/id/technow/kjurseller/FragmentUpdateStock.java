@@ -161,9 +161,7 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
                     UpdateStockResponse updateStockResponse = response.body();
                     if (updateStockResponse.getStatus().equals("success")) {
                         Toast.makeText(mContext, "Stock added", Toast.LENGTH_LONG).show();
-                        //mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        //startActivity(new Intent(getActivity(), ProductUpdateStockActivity.class));
-                        Intent intent = new Intent(getActivity(), ProductUpdateStockActivity.class);
+                         Intent intent = new Intent(getActivity(), ProductUpdateStockActivity.class);
                         intent.putExtra("locTodayId", locTodayId);
                         startActivity(intent);
                     } else {
