@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:gravity="end"
+                    android:gravity="start"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10ssp" />
 

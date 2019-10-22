@@ -39,6 +39,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_23sdp"
+                    android:layout_weight="0.4">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="@dimen/_49sdp"
+                        android:layout_height="@dimen/_49sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_person"
+                        app:civ_border_color="@color/gray"
+                        app:civ_border_width="1dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnEditPic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_13sdp"
+                    android:layout_weight="0.6"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:text="Change Profile Picture"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_23sdp"
+                android:background="#4d4f9a94" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal">

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,27 +17,37 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import id.technow.kjurseller.api.RetrofitClient;
 import id.technow.kjurseller.model.DetailUserResponse;
 import id.technow.kjurseller.model.EditUserResponse;
 import id.technow.kjurseller.model.User;
 import id.technow.kjurseller.storage.SharedPrefManager;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SettingsProfileActivity extends AppCompatActivity {
-    private EditText etSEmail, etSPhone;
-    private TextView tvSBirth;
+    private EditText edtSEmail, edtSPhone;
+    private TextView edtSBirth, btnEditPic;
+    private CircleImageView imgProfile;;
     private int pYear, pMonth, pDay;
+    private static final int REQUEST_CHOOSE_IMAGE = 3;
     private Button btnConfirm;
     Context mContext;
     ProgressDialog loading;
-
+    File imgValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +64,23 @@ public class SettingsProfileActivity extends AppCompatActivity {
 
         mContext = this;
 
-        etSEmail = findViewById(R.id.edtSEmail);
-        etSPhone = findViewById(R.id.edtSPhone);
-        tvSBirth = findViewById(R.id.edtSBirth);
+        imgProfile = findViewById(R.id.imgProfile);
+        btnEditPic = findViewById(R.id.btnEditPic);
+        edtSEmail = findViewById(R.id.edtSEmail);
+        edtSPhone = findViewById(R.id.edtSPhone);
+        edtSBirth = findViewById(R.id.edtSBirth);
 
-        tvSBirth.setOnClickListener(new View.OnClickListener() {
+        detailUser();
+
+        btnEditPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EasyImage.openChooserWithGallery(SettingsProfileActivity.this, "Choose Picture",
+                        REQUEST_CHOOSE_IMAGE);
+            }
+        });
+
+        edtSBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -81,7 +104,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
                             fd = "0" + pDay;
                         }
 
-                        tvSBirth.setText(pYear+"-"+fm+"-"+fd);
+                        edtSBirth.setText(pYear+"-"+fm+"-"+fd);
                     }
                 };
                 DatePickerDialog dialog = new DatePickerDialog(mContext, pDateSetListener, pYear, pMonth, pDay);
@@ -109,6 +132,53 @@ public class SettingsProfileActivity extends AppCompatActivity {
         detailUser();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+            @Override
+            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                CropImage.activity(Uri.fromFile(imageFile))
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setCropShape(CropImageView.CropShape.OVAL)
+                        .setFixAspectRatio(true)
+                        .start(SettingsProfileActivity.this);
+            }
+
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                super.onImagePickerError(e, source, type);
+                Toast.makeText(SettingsProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCanceled(EasyImage.ImageSource source, int type) {
+                super.onCanceled(source, type);
+            }
+        });
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                imgValue = new File(resultUri.getPath());
+
+                Picasso.get()
+                        .load(new File(resultUri.getPath()))
+                        .error(R.drawable.ic_close)
+                        .resize(500, 500)
+                        .centerInside()
+                        .noFade()
+                        .into(imgProfile);
+                //avatar = 0;
+                //uploadFoto();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+
+                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void detailUser() {
         String accept = "application/json";
 
@@ -129,12 +199,12 @@ public class SettingsProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     DetailUserResponse detailUserResponse = response.body();
                     if (detailUserResponse.getStatus().equals("success")) {
-                        etSEmail.setText(detailUserResponse.getDetailUser().getEmail());
-                        etSPhone.setText(detailUserResponse.getDetailUser().getPhone());
+                        edtSEmail.setText(detailUserResponse.getDetailUser().getEmail());
+                        edtSPhone.setText(detailUserResponse.getDetailUser().getPhone());
                         if (detailUserResponse.getDetailUser().getBirthDate() != null) {
-                            tvSBirth.setText(sdf.format(detailUserResponse.getDetailUser().getBirthDate()));
+                            edtSBirth.setText(sdf.format(detailUserResponse.getDetailUser().getBirthDate()));
                         } else {
-                            tvSBirth.setText("null");
+                            edtSBirth.setText("null");
                         }
                     }
                 }
@@ -151,42 +221,42 @@ public class SettingsProfileActivity extends AppCompatActivity {
     }
 
     private void editUser() {
-        String email = etSEmail.getText().toString().trim();
-        String phone = etSPhone.getText().toString().trim();
-        String birth = tvSBirth.getText().toString().trim();
+        String email = edtSEmail.getText().toString().trim();
+        String phone = edtSPhone.getText().toString().trim();
+        String birth = edtSBirth.getText().toString().trim();
 
         if (email.isEmpty()) {
             loading.dismiss();
-            etSEmail.setError("Email is required");
-            etSEmail.requestFocus();
+            edtSEmail.setError("Email is required");
+            edtSEmail.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             loading.dismiss();
-            etSEmail.setError("Enter a valid Email");
-            etSEmail.requestFocus();
+            edtSEmail.setError("Enter a valid Email");
+            edtSEmail.requestFocus();
             return;
         }
 
         if (phone.isEmpty()) {
             loading.dismiss();
-            etSPhone.setError("Phone Number is required");
-            etSPhone.requestFocus();
+            edtSPhone.setError("Phone Number is required");
+            edtSPhone.requestFocus();
             return;
         }
 
         if (phone.length() < 10 || phone.length() > 13) {
             loading.dismiss();
-            etSPhone.setError("Phone Number should be at least 10-13 characters long");
-            etSPhone.requestFocus();
+            edtSPhone.setError("Phone Number should be at least 10-13 characters long");
+            edtSPhone.requestFocus();
             return;
         }
 
         if (birth.equals("null")) {
             loading.dismiss();
-            tvSBirth.setError("Birth Date is required");
-            tvSBirth.requestFocus();
+            edtSBirth.setError("Birth Date is required");
+            edtSBirth.requestFocus();
             return;
         }
 

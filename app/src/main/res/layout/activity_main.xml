@@ -58,7 +58,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_8sdp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_launcher_background"
+                                android:src="@drawable/ic_person"
                                 app:civ_border_color="@color/white"
                                 app:civ_border_width="@dimen/_2sdp" />
 
@@ -173,7 +173,7 @@
                             android:layout_width="@dimen/_35sdp"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_13sdp"
-                            android:src="@drawable/ic_store" />
+                            android:src="@drawable/ic_stores" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -249,7 +249,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:src="@drawable/ic_store" />
+                                android:src="@drawable/ic_stores_open" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -294,7 +294,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:src="@drawable/ic_store" />
+                                android:src="@drawable/ic_live_sales" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -339,7 +339,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:src="@drawable/ic_store" />
+                                android:src="@drawable/ic_stores_close" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -398,7 +398,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:src="@drawable/ic_store" />
+                                android:src="@drawable/ic_report" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -456,7 +456,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
-                                android:src="@drawable/ic_store" />
+                                android:src="@drawable/ic_contact_us" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

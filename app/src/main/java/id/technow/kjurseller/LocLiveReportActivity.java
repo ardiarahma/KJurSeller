@@ -1,6 +1,11 @@
 package id.technow.kjurseller;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -29,12 +36,15 @@ public class LocLiveReportActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LocationLRAdapter lAdapter;
     private SwipeRefreshLayout swipeRefresh;
+    Context mContext;
     ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_live_report);
+
+        mContext = this;
 
         ImageButton btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +62,7 @@ public class LocLiveReportActivity extends AppCompatActivity {
                 if (lAdapter != null) {
                     lAdapter.refreshEvents(locationTodayList);
                 }
-                locToday();
+                checkConnection();
             }
         });
     }
@@ -62,7 +72,36 @@ public class LocLiveReportActivity extends AppCompatActivity {
     {
         super.onResume();
         loading = ProgressDialog.show(LocLiveReportActivity.this, null, getString(R.string.please_wait), true, false);
-        locToday();
+        checkConnection();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void checkConnection() {
+        if (isNetworkAvailable()) {
+            locToday();
+        } else {
+            final Dialog dialog = new Dialog(mContext);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.dialog_no_internet);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            Button btnRetry = dialog.findViewById(R.id.btnRetry);
+            btnRetry.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    checkConnection();
+                }
+            });
+            dialog.show();
+        }
     }
 
     private void locToday() {

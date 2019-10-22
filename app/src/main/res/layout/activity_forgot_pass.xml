@@ -28,9 +28,11 @@
             android:textSize="@dimen/_22sdp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true" />
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/img_forgotpass_white" />
 
     </RelativeLayout>
 

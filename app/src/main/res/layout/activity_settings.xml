@@ -41,7 +41,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_user" />
 
         <TextView
             android:layout_width="0dp"
@@ -81,7 +81,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_bank_info" />
 
         <TextView
             android:layout_width="0dp"
@@ -121,7 +121,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_change_pass" />
 
         <TextView
             android:layout_width="0dp"
@@ -156,7 +156,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_terms_condition" />
 
         <TextView
             android:layout_width="0dp"
@@ -196,7 +196,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_about_us" />
 
         <TextView
             android:layout_width="0dp"
@@ -236,7 +236,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_store" />
+            android:src="@drawable/ic_version" />
 
         <TextView
             android:layout_width="0dp"
