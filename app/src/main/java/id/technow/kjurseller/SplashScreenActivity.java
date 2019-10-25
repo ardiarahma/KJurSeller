@@ -12,11 +12,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import id.technow.kjurseller.storage.SharedPrefManager;
 
 public class SplashScreenActivity extends AppCompatActivity {
     Context mContext;
+    ImageView imgSplashOne;
+    ImageView imgSplashTwo;
+    ImageView imgSplashThree;
+    ImageView imgSplashFour;
+    ImageView imgSplashFive;
+    int loadPosition = 0;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +33,20 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         mContext = this;
 
+        imgSplashOne = findViewById(R.id.imgSplashOne);
+        imgSplashTwo = findViewById(R.id.imgSplashTwo);
+        imgSplashThree = findViewById(R.id.imgSplashThree);
+        imgSplashFour = findViewById(R.id.imgSplashFour);
+        imgSplashFive = findViewById(R.id.imgSplashFive);
+
+        mHandler = new Handler();
+        mStatusChecker.run();
+
         checkConnection();
     }
 
     private void checkLogin() {
-        new Handler().postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
@@ -76,4 +93,43 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     }
 
+    Runnable mStatusChecker = new Runnable() {
+        @Override
+        public void run() {
+
+            displayLoadingPosition(loadPosition);
+
+            loadPosition++;
+
+            mHandler.postDelayed(mStatusChecker, 250);
+        }
+    };
+
+    private void displayLoadingPosition(int loadPosition) {
+        int emphasizedViewPos = loadPosition % 5;
+
+        imgSplashOne.setImageResource(R.drawable.ic_splash_one);
+        imgSplashTwo.setImageResource(R.drawable.ic_splash_two);
+        imgSplashThree.setImageResource(R.drawable.ic_splash_three);
+        imgSplashFour.setImageResource(R.drawable.ic_splash_four);
+        imgSplashFive.setImageResource(R.drawable.ic_splash_five);
+
+        switch (emphasizedViewPos) {
+            case 0:
+                imgSplashOne.setImageResource(R.drawable.ic_splash_one_w);
+                break;
+            case 1:
+                imgSplashTwo.setImageResource(R.drawable.ic_splash_two_w);
+                break;
+            case 2:
+                imgSplashThree.setImageResource(R.drawable.ic_splash_three_w);
+                break;
+            case 3:
+                imgSplashFour.setImageResource(R.drawable.ic_splash_four_w);
+                break;
+            case 4:
+                imgSplashFive.setImageResource(R.drawable.ic_splash_five_w);
+                break;
+        }
+    }
 }

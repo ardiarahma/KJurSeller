@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -13,6 +16,7 @@ import id.technow.kjurseller.ProductLiveReportActivity;
 import id.technow.kjurseller.ProductUpdateStockActivity;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.model.LocationToday;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class LocationUSAdapter extends RecyclerView.Adapter<LocationUSAdapter.CustomViewHolder> {
 
@@ -34,7 +38,20 @@ public class LocationUSAdapter extends RecyclerView.Adapter<LocationUSAdapter.Cu
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         LocationToday locationToday = locationTodays.get(position);
         holder.txtLocName.setText(locationToday.getNama());
+        holder.txtLocDesc.setText(locationToday.getDesc());
         holder.id = locationTodays.get(position).getId();
+        int radius = 14;
+        if (locationToday.getPic() != null && !locationToday.getPic().isEmpty()) {
+            Picasso.get()
+                    .load(locationToday.getPic())
+                    //.placeholder(R.drawable.ic_snack)
+                    .error(R.drawable.ic_close)
+                    .resize(700, 260)
+                    .centerInside()
+                    .noFade()
+                    .transform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.TOP))
+                    .into(holder.imgLoc);
+        }
     }
 
     @Override
@@ -44,6 +61,7 @@ public class LocationUSAdapter extends RecyclerView.Adapter<LocationUSAdapter.Cu
 
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtLocName, txtLocDesc;
+        private ImageView imgLoc;
         private int id;
 
         public CustomViewHolder(View view) {
@@ -51,6 +69,7 @@ public class LocationUSAdapter extends RecyclerView.Adapter<LocationUSAdapter.Cu
             itemView.setOnClickListener(this);
             txtLocName = itemView.findViewById(R.id.txtLocName);
             txtLocDesc = itemView.findViewById(R.id.txtLocDesc);
+            imgLoc = itemView.findViewById(R.id.imgLoc);
         }
 
         public void onClick(View v) {

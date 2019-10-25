@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".SplashScreenActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Splash"
-        android:gravity="center"
-        android:textAlignment="center"/>
+    <ImageView
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:src="@drawable/logo" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgSplashOne"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"/>
+
+        <ImageView
+            android:id="@+id/imgSplashTwo"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"/>
+
+        <ImageView
+            android:id="@+id/imgSplashThree"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"/>
+
+        <ImageView
+            android:id="@+id/imgSplashFour"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"/>
+
+        <ImageView
+            android:id="@+id/imgSplashFive"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/rubik_light"
+        android:textSize="@dimen/_18sdp"
+        android:text="S  e  l  l  e  r"
+        android:textAllCaps="true"/>
+
+</LinearLayout>
