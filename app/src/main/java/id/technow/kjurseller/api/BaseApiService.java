@@ -51,6 +51,12 @@ public interface BaseApiService {
     Call<DetailUserResponse> detailUser(
             @Header("Authorization") String authToken,
             @Header("Accept") String accept);
+    @FormUrlEncoded
+    @PUT("upload-ava")
+    Call<EditUserResponse> uploadAva(
+            //@Header("Accept") String accept,
+            @Header("Authorization") String authToken,
+            @Field("foto") String image);
 
     @FormUrlEncoded
     @POST("email/verify")

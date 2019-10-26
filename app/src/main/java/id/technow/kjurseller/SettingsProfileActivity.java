@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -21,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,6 +52,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
     Context mContext;
     ProgressDialog loading;
     File imgValue;
+    String avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +175,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
                         .noFade()
                         .into(imgProfile);
                 //avatar = 0;
-                //uploadFoto();
+                uploadFoto();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
 
@@ -178,7 +183,59 @@ public class SettingsProfileActivity extends AppCompatActivity {
             }
         }
     }
+    public String imgToString() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        String filePath = imgValue.getPath();
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        //    bt_uploadFoto.setEnabled(true);
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
 
+    public void uploadFoto() {
+      //  loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
+        String accept = "application/json";
+        User user = SharedPrefManager.getInstance(this).getUser();
+        String token = user.getToken();
+
+        String image = imgToString();
+        retrofit2.Call<EditUserResponse> call = RetrofitClient.getInstance().getApi().uploadAva("Bearer " + token, image);
+        call.enqueue(new Callback<EditUserResponse>() {
+            @Override
+            public void onResponse(retrofit2.Call<EditUserResponse> call, Response<EditUserResponse> response) {
+                if (response.isSuccessful()) {
+                    loading.dismiss();
+                    Toast.makeText(SettingsProfileActivity.this, "Succes Uploading Profile Picture", Toast.LENGTH_LONG).show();
+                } else {
+                    loading.dismiss();
+                    Toast.makeText(SettingsProfileActivity.this, "Failed Uploading Profile Picture", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(SettingsProfileActivity.this, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                    Picasso.get()
+                            .load(avatar)
+                            .error(R.drawable.ic_user)
+                            .resize(500, 500)
+                            .centerInside()
+                            .noFade()
+                            .into(imgProfile);
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<EditUserResponse> call, Throwable t) {
+                loading.dismiss();
+                // Toast.makeText(SettingsProfileActivity.this, t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SettingsProfileActivity.this, "Failed Uploading Profile Picture", Toast.LENGTH_LONG).show();
+                Picasso.get()
+                        .load(avatar)
+                        .error(R.drawable.ic_user)
+                        .resize(500, 500)
+                        .centerInside()
+                        .noFade()
+                        .into(imgProfile);
+            }
+        });
+    }
     private void detailUser() {
         String accept = "application/json";
 
