@@ -1,5 +1,6 @@
 package id.technow.kjurseller.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
@@ -19,10 +20,11 @@ import java.util.Random;
 public class ProductLogAdapter extends RecyclerView.Adapter<ProductLogAdapter.CustomViewHolder> {
 
     List<ProductLogHistory> productLogHistories;
-    List<String> colors;
+    Context mContext;
 
-    public ProductLogAdapter(List<ProductLogHistory> productLogHistories) {
+    public ProductLogAdapter(List<ProductLogHistory> productLogHistories, Context mContext) {
         this.productLogHistories = productLogHistories;
+        this.mContext = mContext;
     }
 
     @Override
@@ -36,40 +38,28 @@ public class ProductLogAdapter extends RecyclerView.Adapter<ProductLogAdapter.Cu
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ProductLogHistory productLogHistory = productLogHistories.get(position);
-        holder.txtRef.setText(productLogHistory.getType());
+        holder.txtType.setText(productLogHistory.getType());
+        holder.txtRef.setText(productLogHistory.getReferenceId());
         holder.txtDateTime.setText(productLogHistory.getDateCreated());
         holder.txtRef.setText(String.valueOf(productLogHistory.getId()));
         holder.txtOldStock.setText(String.valueOf(productLogHistory.getStockOld()));
         holder.txtChangeStock.setText(String.valueOf(productLogHistory.getStockChange()));
         holder.txtNewStock.setText(String.valueOf(productLogHistory.getStockNew()));
 
-        colors = new ArrayList<String>();
-
-        colors.add("#e51c23");
-        colors.add("#e91e63");
-        colors.add("#9c27b0");
-        colors.add("#673ab7");
-        colors.add("#3f51b5");
-        colors.add("#5677fc");
-        colors.add("#03a9f4");
-        colors.add("#00bcd4");
-        colors.add("#009688");
-        colors.add("#259b24");
-        colors.add("#8bc34a");
-        colors.add("#cddc39");
-        colors.add("#ffeb3b");
-        colors.add("#ff9800");
-        colors.add("#ff5722");
-        colors.add("#795548");
-        colors.add("#9e9e9e");
-        colors.add("#607d8b");
-
-        Random r = new Random();
-        int i1 = r.nextInt(17 - 0) + 0;
-
-        holder.imgLiveReport.setColorFilter(Color.parseColor(colors.get(i1)), PorterDuff.Mode.SRC_IN);
-        holder.txtType.setTextColor(Color.parseColor(colors.get(i1)));
-        holder.txtDateTime.setTextColor(Color.parseColor(colors.get(i1)));
+        String type = productLogHistory.getType();
+        if (type.equals("Open Stock")){
+            holder.imgLiveReport.setColorFilter(mContext.getResources().getColor(R.color.colorPrimaryDark));
+            holder.txtType.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+            holder.txtDateTime.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+        } else if (type.equals("Transaction")){
+            holder.imgLiveReport.setColorFilter(mContext.getResources().getColor(R.color.dark_slate_gray));
+            holder.txtType.setTextColor(mContext.getResources().getColor(R.color.dark_slate_gray));
+            holder.txtDateTime.setTextColor(mContext.getResources().getColor(R.color.dark_slate_gray));
+        } else {
+            holder.imgLiveReport.setColorFilter(mContext.getResources().getColor(R.color.red));
+            holder.txtType.setTextColor(mContext.getResources().getColor(R.color.red));
+            holder.txtDateTime.setTextColor(mContext.getResources().getColor(R.color.red));
+        }
     }
 
     @Override

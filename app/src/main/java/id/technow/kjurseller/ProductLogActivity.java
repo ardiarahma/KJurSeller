@@ -128,7 +128,7 @@ public class ProductLogActivity extends AppCompatActivity {
                         tvProductStockNow.setText(String.valueOf(productLogResponse.getProductLogStock().getProductStock()));
                         productLogHistoryList = productLogResponse.getProductLogHistory();
                         recyclerView = (RecyclerView) findViewById(R.id.listProductLog);
-                        plAdapter = new ProductLogAdapter(productLogHistoryList);
+                        plAdapter = new ProductLogAdapter(productLogHistoryList, mContext);
                         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(eLayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());

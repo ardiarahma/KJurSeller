@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import id.technow.kjurseller.FragmentUpdateStock;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.model.ProductToday;
@@ -42,28 +44,24 @@ public class ProductUSAdapter extends RecyclerView.Adapter<ProductUSAdapter.Cust
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ProductToday product = products.get(position);
         holder.txtProductName.setText(product.getProductName());
+        holder.txtCurrentStock.setText(String.valueOf(product.getProductStockAll()));
         holder.id = products.get(position).getId();
         holder.productName = products.get(position).getProductName();
         holder.productStock = products.get(position).getProductStockNow();
-
-        /*
         holder.productPic = products.get(position).getProductPic();
 
-        if(product.get() != null && !product.getProductPic().isEmpty()){
+        if(product.getProductPic() != null && !product.getProductPic().isEmpty()){
             Picasso.get()
                     .load(product.getProductPic())
-                    .placeholder(R.drawable.ic_snack)
+                    //.placeholder(R.drawable.ic_snack)
                     .error(R.drawable.ic_close)
-                    // To fit image into imageView
-                    //.fit()
                     .resize(500, 500)
                     .centerInside()
-                    // To prevent fade animation
                     .noFade()
-                    .into(holder.ivProduct);
+                    .into(holder.imgProduct);
         } else{
-            holder.ivProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
-        }*/
+            //holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
+        }
     }
 
     @Override
@@ -72,7 +70,7 @@ public class ProductUSAdapter extends RecyclerView.Adapter<ProductUSAdapter.Cust
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtProductName;
+        private TextView txtProductName, txtCurrentStock;
         private LinearLayout btnUpdateStock;
         private ImageView imgProduct;
         private int productStock;
@@ -81,6 +79,7 @@ public class ProductUSAdapter extends RecyclerView.Adapter<ProductUSAdapter.Cust
         public CustomViewHolder(View view) {
             super(view);
             txtProductName = itemView.findViewById(R.id.txtProductName);
+            txtCurrentStock = itemView.findViewById(R.id.txtCurrentStock);
             btnUpdateStock = itemView.findViewById(R.id.btnUpdateStock);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             btnUpdateStock.setOnClickListener(this);

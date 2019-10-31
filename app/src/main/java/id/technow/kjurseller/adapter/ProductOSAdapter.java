@@ -61,7 +61,6 @@ public class ProductOSAdapter extends RecyclerView.Adapter<ProductOSAdapter.Cust
         holder.id = products.get(position).getId();
         holder.productName = products.get(position).getProductName();
         holder.productPrice = products.get(position).getProductPrice();
-
         holder.productPic = products.get(position).getProductPic();
 
         if(product.getProductPic() != null && !product.getProductPic().isEmpty()){

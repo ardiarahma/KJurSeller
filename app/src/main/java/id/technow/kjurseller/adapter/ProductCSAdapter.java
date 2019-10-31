@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import id.technow.kjurseller.ProductCloseStoreActivity;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.api.RetrofitClient;
@@ -54,6 +56,20 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
         ProductToday product = products.get(position);
         holder.txtProductName.setText(product.getProductName());
         holder.id = products.get(position).getId();
+        if(product.getProductPic() != null && !product.getProductPic().isEmpty()){
+            Picasso.get()
+                    .load(product.getProductPic())
+                    //.placeholder(R.drawable.ic_snack)
+                    .error(R.drawable.ic_close)
+                    // .fit()
+                    .resize(500, 500)
+                    .centerInside()
+                    // To prevent fade animation
+                    .noFade()
+                    .into(holder.imgProduct);
+        } else{
+            //holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
+        }
     }
 
     @Override
@@ -64,13 +80,14 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtProductName;
         private ImageView btnNext;
-        private View viewColor;
+        private ImageView imgProduct;
         private String id;
 
         public CustomViewHolder(View view) {
             super(view);
             txtProductName = itemView.findViewById(R.id.txtProductName);
             btnNext = itemView.findViewById(R.id.btnNext);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
             btnNext.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
@@ -91,6 +108,7 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     closeItem();
+                    dialog.dismiss();
                 }
             });
 
@@ -113,8 +131,10 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
                         CloseStoreResponse closeStoreResponse = response.body();
                         if (closeStoreResponse.getStatus().equals("success")) {
                             Toast.makeText(mContext, closeStoreResponse.getMessage(), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(itemView.getContext(), ProductCloseStoreActivity.class);
-                            itemView.getContext().startActivity(intent);
+                            refreshEvents(products);
+                            if (mContext instanceof ProductCloseStoreActivity) {
+                                ((ProductCloseStoreActivity)mContext).checkConnection();
+                            }
                         }
                     }
                 }

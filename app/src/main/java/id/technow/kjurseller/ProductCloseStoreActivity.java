@@ -94,7 +94,7 @@ public class ProductCloseStoreActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void checkConnection() {
+    public void checkConnection() {
         if (isNetworkAvailable()) {
             productList();
         } else {
@@ -114,13 +114,6 @@ public class ProductCloseStoreActivity extends AppCompatActivity {
             });
             dialog.show();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(ProductCloseStoreActivity.this, LocCloseStoreActivity.class);
-        ProductCloseStoreActivity.this.finish();
-        startActivity(i);
     }
 
     private void productList() {

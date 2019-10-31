@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        mContext = this;
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     } catch (Exception e) {
-                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("TAG", "Response = " + e.toString());
+                        Log.e("Error", "Response = " + e.getMessage());
+                        //Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
                 swipeRefresh.setRefreshing(false);

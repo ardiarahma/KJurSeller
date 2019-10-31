@@ -38,7 +38,7 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
     Context mContext;
     ProgressDialog loading;
     int locTodayId;
-   private BottomSheetBehavior mBottomSheetBehaviour;
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -119,10 +119,13 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
-            mBottomSheetBehaviour = (BottomSheetBehavior) behavior;
+            mBottomSheetBehavior = (BottomSheetBehavior) behavior;
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        dismiss();
+                    }
                 }
 
                 @Override
@@ -160,10 +163,9 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
                 if (response.isSuccessful()) {
                     UpdateStockResponse updateStockResponse = response.body();
                     if (updateStockResponse.getStatus().equals("success")) {
-                        Toast.makeText(mContext, "Stock added", Toast.LENGTH_LONG).show();
-                         Intent intent = new Intent(getActivity(), ProductUpdateStockActivity.class);
-                        intent.putExtra("locTodayId", locTodayId);
-                        startActivity(intent);
+                        Toast.makeText(mContext, "Stock added.", Toast.LENGTH_LONG).show();
+                        mBottomSheetBehavior.setHideable(true);
+                        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     } else {
                         Toast.makeText(mContext, updateStockResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }

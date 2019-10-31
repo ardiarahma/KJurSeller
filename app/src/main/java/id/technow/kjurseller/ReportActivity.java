@@ -202,8 +202,11 @@ public class ReportActivity extends AppCompatActivity {
                     ReportListResponse reportListResponse = response.body();
                     if (reportListResponse.getStatus().equals("success")) {
                         layoutResult.setVisibility(View.VISIBLE);
-
-                        txtRStock.setText(reportListResponse.getStock());
+                        if (reportListResponse.getStock() == null) {
+                            txtRStock.setText("0");
+                        } else {
+                            txtRStock.setText(reportListResponse.getStock());
+                        }
                         txtRSold.setText(String.valueOf(reportListResponse.getSold()));
                         txtRRemain.setText(String.valueOf(reportListResponse.getRemain()));
                         txtRLocation.setText(String.valueOf(reportListResponse.getLocation()));

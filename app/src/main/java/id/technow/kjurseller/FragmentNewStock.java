@@ -41,7 +41,7 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
     private EditText edtStock, edtPrice;
     Context mContext;
     ProgressDialog loading;
-    private BottomSheetBehavior mBottomSheetBehaviour;
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -154,10 +154,13 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
-            mBottomSheetBehaviour = (BottomSheetBehavior) behavior;
+            mBottomSheetBehavior = (BottomSheetBehavior) behavior;
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        dismiss();
+                    }
                 }
 
                 @Override
@@ -205,9 +208,11 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
                     NewStockResponse newStockResponse = response.body();
                     if (newStockResponse.getStatus().equals("success")) {
                         Toast.makeText(mContext, "Success", Toast.LENGTH_LONG).show();
-                        mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        mBottomSheetBehavior.setHideable(true);
+                        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
                     } else {
-                        Toast.makeText(mContext, newStockResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "Can't open on the same day.", Toast.LENGTH_LONG).show();
                     }
                 }
             }

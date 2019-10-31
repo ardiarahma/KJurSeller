@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import id.technow.kjurseller.ProductLogActivity;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.model.ProductToday;
@@ -34,8 +36,19 @@ public class ProductLRAdapter extends RecyclerView.Adapter<ProductLRAdapter.Cust
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         ProductToday product = products.get(position);
         holder.txtProductName.setText(product.getProductName());
-        //holder.imgProduct.setImageResource(product.);
         holder.id = products.get(position).getId();
+        if(product.getProductPic() != null && !product.getProductPic().isEmpty()){
+            Picasso.get()
+                    .load(product.getProductPic())
+                    //.placeholder(R.drawable.ic_snack)
+                    .error(R.drawable.ic_close)
+                    .resize(500, 500)
+                    .centerInside()
+                    .noFade()
+                    .into(holder.imgProduct);
+        } else{
+            //holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
+        }
     }
 
     @Override
