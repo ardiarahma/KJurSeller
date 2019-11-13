@@ -3,18 +3,28 @@ package id.technow.kjurseller;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import id.technow.kjurseller.api.RetrofitClient;
+import id.technow.kjurseller.model.VersionAppResponse;
 import id.technow.kjurseller.storage.SharedPrefManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashScreenActivity extends AppCompatActivity {
     Context mContext;
@@ -62,6 +72,75 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
             }
         }, 2500L);
+    }
+
+    private void checkVersion() {
+        Call<VersionAppResponse> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .version();
+
+        call.enqueue(new Callback<VersionAppResponse>() {
+            @Override
+            public void onResponse(Call<VersionAppResponse> call, Response<VersionAppResponse> response) {
+                VersionAppResponse versionAppResponse = response.body();
+                if (response.isSuccessful()) {
+                    if (versionAppResponse.getStatus().equals("success")) {
+                        String ver = String.valueOf(versionAppResponse.getVersionApp().getVersion());
+                        String subVer = String.valueOf(versionAppResponse.getVersionApp().getVersionSub());
+                        String subSubVer = String.valueOf(versionAppResponse.getVersionApp().getVersionSubSub());
+                        String versionApi = ver + "." + subVer + "." + subSubVer;
+                        PackageInfo pInfo = null;
+                        try {
+                            pInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        String version = pInfo.versionName;
+                        if (version.equals(versionApi)) {
+                            checkLogin();
+                        } else {
+                            final Dialog dialog = new Dialog(mContext);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setCancelable(false);
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.setContentView(R.layout.dialog_update_app);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                            Button btnUpdate = dialog.findViewById(R.id.btnUpdate);
+                            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    final String appPackageName = getPackageName();
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                    } catch (android.content.ActivityNotFoundException anfe) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                    }
+                                }
+                            });
+
+                            Button btnUpdateLater = dialog.findViewById(R.id.btnUpdateLater);
+                            btnUpdateLater.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    SplashScreenActivity.this.finish();
+                                }
+                            });
+                            dialog.show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VersionAppResponse> call, Throwable t) {
+                Log.e("debug", "onFailure: ERROR > " + t.toString());
+                Toast.makeText(mContext, "Something wrong. Please try again later.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private boolean isNetworkAvailable() {

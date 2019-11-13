@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 
 import id.technow.kjurseller.adapter.WalletHistoryAdapter;
@@ -73,11 +75,11 @@ public class WalletActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        loading = ProgressDialog.show(WalletActivity.this, null, getString(R.string.please_wait), true, false);
         walletDetail();
     }
 
     private void walletDetail() {
+        loading = ProgressDialog.show(WalletActivity.this, null, getString(R.string.please_wait), true, false);
         User user = SharedPrefManager.getInstance(this).getUser();
         String token = user.getToken();
         Call<WalletResponse> call = RetrofitClient
@@ -93,7 +95,13 @@ public class WalletActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     WalletResponse walletResponse = response.body();
                     if (walletResponse.getStatus().equals("success")) {
-                        txtBalanceAll.setText(String.valueOf(walletResponse.getWalletAccount().getBalance()));
+                        DecimalFormat fmt = new DecimalFormat();
+                        DecimalFormatSymbols fmts = new DecimalFormatSymbols();
+                        fmts.setGroupingSeparator('.');
+                        fmt.setGroupingSize(3);
+                        fmt.setGroupingUsed(true);
+                        fmt.setDecimalFormatSymbols(fmts);
+                        txtBalanceAll.setText(String.valueOf(fmt.format(walletResponse.getWalletAccount().getBalance())));
                         txtAccNumber.setText(walletResponse.getWalletAccount().getPhoneNumber());
                         walletLogList = walletResponse.getWalletLog();
                         recyclerView = (RecyclerView) findViewById(R.id.listWalletHistory);

@@ -164,6 +164,9 @@ public class FragmentUpdateStock extends BottomSheetDialogFragment {
                     UpdateStockResponse updateStockResponse = response.body();
                     if (updateStockResponse.getStatus().equals("success")) {
                         Toast.makeText(mContext, "Stock added.", Toast.LENGTH_LONG).show();
+                        if (mContext instanceof ProductUpdateStockActivity) {
+                            ((ProductUpdateStockActivity) mContext).checkConnection();
+                        }
                         mBottomSheetBehavior.setHideable(true);
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     } else {

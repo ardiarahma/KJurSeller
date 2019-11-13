@@ -1,16 +1,22 @@
 package id.technow.kjurseller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import id.technow.kjurseller.api.RetrofitClient;
@@ -40,8 +46,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         mContext = this;
 
-        LinearLayout llProfiles = this.findViewById(R.id.btnProfile);
-        llProfiles.setOnClickListener(new View.OnClickListener() {
+        LinearLayout btnProfile = this.findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, SettingsProfileActivity.class);
@@ -49,8 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout llBankInfo = this.findViewById(R.id.btnBankInfo);
-        llBankInfo.setOnClickListener(new View.OnClickListener() {
+        LinearLayout btnBankInfo = this.findViewById(R.id.btnBankInfo);
+        btnBankInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, SettingsBankInfoActivity.class);
@@ -58,14 +64,24 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout llChangePassword = this.findViewById(R.id.btnChangePass);
-        llChangePassword.setOnClickListener(new View.OnClickListener() {
+        LinearLayout btnChangePass = this.findViewById(R.id.btnChangePass);
+        btnChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, SettingsChangePassActivity.class);
                 startActivity(intent);
             }
         });
+
+        TextView txtVersion = findViewById(R.id.txtVersion);
+        PackageInfo pInfo = null;
+        try {
+            pInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String version = pInfo.versionName;
+        txtVersion.setText(version);
 
         Button llLogOut = this.findViewById(R.id.btnLogout);
         llLogOut.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void logOut(){
+    private void logOut() {
         SharedPrefManager.getInstance(this).clear();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -84,27 +100,29 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void confirmLogOut() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.confirmation);
-        builder.setMessage(R.string.are_you_sure_logout);
-        builder.setCancelable(false);
-        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        Button btnNo = dialog.findViewById(R.id.btnNo);
+        btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
-        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        Button btnYes = dialog.findViewById(R.id.btnYes);
+        btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 logoutUser();
                 logOut();
-                dialog.dismiss();
             }
         });
 
-        builder.show();
+        dialog.show();
     }
 
     private void logoutUser() {

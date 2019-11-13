@@ -208,9 +208,11 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
                     NewStockResponse newStockResponse = response.body();
                     if (newStockResponse.getStatus().equals("success")) {
                         Toast.makeText(mContext, "Success", Toast.LENGTH_LONG).show();
+                        if (mContext instanceof ProductOpenStoreActivity) {
+                            ((ProductOpenStoreActivity) mContext).checkConnection();
+                        }
                         mBottomSheetBehavior.setHideable(true);
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
                     } else {
                         Toast.makeText(mContext, "Can't open on the same day.", Toast.LENGTH_LONG).show();
                     }

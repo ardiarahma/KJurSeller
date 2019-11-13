@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/_6sdp"
-    android:layout_marginStart="@dimen/_6sdp"
-    android:layout_marginTop="@dimen/_2sdp"
-    android:orientation="vertical">
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/_6sdp"
+    android:paddingTop="@dimen/_2sdp"
+    android:paddingEnd="@dimen/_6sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,13 +48,25 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
 
+            <TextView
+                android:id="@+id/txtProductStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_light"
+                android:text="Already open"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10ssp"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:id="@+id/btnNewStock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:background="@drawable/btn_rounded_corner_accent"
                 android:clickable="true"
                 android:focusable="true"

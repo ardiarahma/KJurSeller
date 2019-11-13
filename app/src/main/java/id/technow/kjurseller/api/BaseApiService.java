@@ -9,6 +9,7 @@ import id.technow.kjurseller.model.DetailUserResponse;
 import id.technow.kjurseller.model.EditBankResponse;
 import id.technow.kjurseller.model.EditUserResponse;
 import id.technow.kjurseller.model.ForgotPasswordResponse;
+import id.technow.kjurseller.model.VersionAppResponse;
 import id.technow.kjurseller.model.WalletResponse;
 import id.technow.kjurseller.model.LocationResponse;
 import id.technow.kjurseller.model.LocationTodayResponse;
@@ -51,10 +52,10 @@ public interface BaseApiService {
     Call<DetailUserResponse> detailUser(
             @Header("Authorization") String authToken,
             @Header("Accept") String accept);
+
     @FormUrlEncoded
     @PUT("upload-ava")
     Call<EditUserResponse> uploadAva(
-            //@Header("Accept") String accept,
             @Header("Authorization") String authToken,
             @Field("foto") String image);
 
@@ -163,4 +164,7 @@ public interface BaseApiService {
             @Field("password_current") String passwordCurrent,
             @Field("password") String passwordNew,
             @Field("password_confirmation") String passwordNewConfirm);
+
+    @GET("version")
+    Call<VersionAppResponse> version();
 }

@@ -18,6 +18,9 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.technow.kjurseller.api.RetrofitClient;
 import id.technow.kjurseller.model.DetailUserResponse;
@@ -152,7 +155,15 @@ public class MainActivity extends AppCompatActivity {
                     if (detailUserResponse.getStatus().equals("success")) {
                         txtEmail.setText(detailUserResponse.getDetailUser().getEmail());
                         txtUsername.setText(detailUserResponse.getDetailUser().getName());
-                        txtBalance.setText(String.valueOf(detailUserResponse.getDetailUser().getBalance()));
+
+                        DecimalFormat fmt = new DecimalFormat();
+                        DecimalFormatSymbols fmts = new DecimalFormatSymbols();
+                        fmts.setGroupingSeparator('.');
+                        fmt.setGroupingSize(3);
+                        fmt.setGroupingUsed(true);
+                        fmt.setDecimalFormatSymbols(fmts);
+
+                        txtBalance.setText(String.valueOf(fmt.format(detailUserResponse.getDetailUser().getBalance())));
                         txtStoreName.setText(detailUserResponse.getDetailUser().getDetailStore().getStoreName());
                         txtProduct.setText(String.valueOf(detailUserResponse.getProduct()) );
                         Picasso.get().load(detailUserResponse.getDetailUser().getPic()).error(R.drawable.ic_person).into(imgProfile);

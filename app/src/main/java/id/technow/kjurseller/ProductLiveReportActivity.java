@@ -127,7 +127,7 @@ public class ProductLiveReportActivity extends AppCompatActivity {
                     ProductListTodayResponse productListTodayResponse = response.body();
                     if (productListTodayResponse.getStatus().equals("success")) {
                         productLiveReportList = productListTodayResponse.getProduct();
-                        pAdapter = new ProductLRAdapter(productLiveReportList);
+                        pAdapter = new ProductLRAdapter(productLiveReportList, mContext);
                         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(eLayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());

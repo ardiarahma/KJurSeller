@@ -1,15 +1,20 @@
 package id.technow.kjurseller.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,19 +62,20 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
         ProductToday product = products.get(position);
         holder.txtProductName.setText(product.getProductName());
         holder.id = products.get(position).getId();
-        if(product.getProductPic() != null && !product.getProductPic().isEmpty()){
+
+        int radius = 10;
+        if (product.getProductPic() != null && !product.getProductPic().isEmpty()) {
             Picasso.get()
                     .load(product.getProductPic())
-                    //.placeholder(R.drawable.ic_snack)
+                    .placeholder(R.drawable.ic_close)
                     .error(R.drawable.ic_close)
-                    // .fit()
                     .resize(500, 500)
                     .centerInside()
-                    // To prevent fade animation
                     .noFade()
+                    .transform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL))
                     .into(holder.imgProduct);
-        } else{
-            //holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
+        } else {
+            holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_close));
         }
     }
 
@@ -93,26 +100,30 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
         }
 
         public void onClick(View v) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setTitle(R.string.confirmation);
-            builder.setMessage(mContext.getString(R.string.are_you_sure_close_item) + "?");
-            builder.setCancelable(false);
-            builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            final Dialog dialog = new Dialog(mContext);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.dialog_close_store_item);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            Button btnNo = dialog.findViewById(R.id.btnNo);
+            btnNo.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View v) {
                     dialog.dismiss();
                 }
             });
-
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            Button btnYes = dialog.findViewById(R.id.btnYes);
+            btnYes.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View v) {
                     closeItem();
                     dialog.dismiss();
                 }
             });
 
-            builder.show();
+            dialog.show();
+
         }
 
         private void closeItem() {
@@ -133,7 +144,7 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
                             Toast.makeText(mContext, closeStoreResponse.getMessage(), Toast.LENGTH_LONG).show();
                             refreshEvents(products);
                             if (mContext instanceof ProductCloseStoreActivity) {
-                                ((ProductCloseStoreActivity)mContext).checkConnection();
+                                ((ProductCloseStoreActivity) mContext).checkConnection();
                             }
                         }
                     }

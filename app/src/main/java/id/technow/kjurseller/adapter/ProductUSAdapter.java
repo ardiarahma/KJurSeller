@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import id.technow.kjurseller.FragmentUpdateStock;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.model.ProductToday;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import java.util.List;
 
@@ -50,17 +52,19 @@ public class ProductUSAdapter extends RecyclerView.Adapter<ProductUSAdapter.Cust
         holder.productStock = products.get(position).getProductStockNow();
         holder.productPic = products.get(position).getProductPic();
 
-        if(product.getProductPic() != null && !product.getProductPic().isEmpty()){
+        int radius = 10;
+        if (product.getProductPic() != null && !product.getProductPic().isEmpty()) {
             Picasso.get()
                     .load(product.getProductPic())
-                    //.placeholder(R.drawable.ic_snack)
+                    .placeholder(R.drawable.ic_close)
                     .error(R.drawable.ic_close)
                     .resize(500, 500)
                     .centerInside()
                     .noFade()
+                    .transform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL))
                     .into(holder.imgProduct);
-        } else{
-            //holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_snack));
+        } else {
+            holder.imgProduct.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_close));
         }
     }
 

@@ -88,7 +88,7 @@
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
             android:textAlignment="center"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_13ssp" />
 
     </LinearLayout>
 
@@ -130,7 +130,8 @@
             android:layout_gravity="end"
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="@dimen/_13ssp" />
 
     </LinearLayout>
 

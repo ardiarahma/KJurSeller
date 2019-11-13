@@ -82,7 +82,7 @@ public class ProductOpenStoreActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void checkConnection() {
+    public void checkConnection() {
         if (isNetworkAvailable()) {
             productList();
         } else {
