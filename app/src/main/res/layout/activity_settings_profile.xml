@@ -183,9 +183,8 @@
                     android:layout_weight="0.6"
                     android:clickable="true"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:singleLine="true"
-                    android:text="null"
+                    android:text="YYYY-MM-DD"
                     android:textAlignment="textEnd"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12ssp" />

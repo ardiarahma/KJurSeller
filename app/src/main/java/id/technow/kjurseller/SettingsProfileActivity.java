@@ -261,7 +261,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
                         if (detailUserResponse.getDetailUser().getBirthDate() != null) {
                             edtSBirth.setText(sdf.format(detailUserResponse.getDetailUser().getBirthDate()));
                         } else {
-                            edtSBirth.setText("null");
+                            edtSBirth.setText("YYYY-MM-DD");
                         }
                     }
                 }
