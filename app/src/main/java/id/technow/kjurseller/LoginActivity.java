@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mContext = this;
 
-        TextView tvForgotPass = findViewById(R.id.btnForgotPass);
-        tvForgotPass.setOnClickListener(new View.OnClickListener() {
+        TextView btnForgotPass = findViewById(R.id.btnForgotPass);
+        btnForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class));

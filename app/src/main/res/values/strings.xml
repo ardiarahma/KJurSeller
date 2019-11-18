@@ -2,6 +2,12 @@
     <string name="app_name">K-Jur Seller</string>
     <string name="please_wait">Please wait. . .</string>
     <string name="please_signin">Please sign in to continue.</string>
+    <string name="no_internet_title">No Internet Connection</string>
+    <string name="no_internet_desc">Please check your connection status and try again.</string>
+    <string name="update_title">Update Available</string>
+    <string name="update_desc">Please update your application to continue.</string>
+    <string name="update">Update</string>
+    <string name="update_later">Update Later</string>
     <string name="login">Login</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
@@ -67,6 +73,11 @@
     <string name="date_information">(Date Format : Year-Month-Day)</string>
     <string name="search">Search</string>
     <string name="verify_email">Verify Your Email</string>
+    <string name="please_verify">Please Verify your Email to using K-Jur</string>
+    <string name="we_sent_to">We sent you a confirmation email to</string>
+    <string name="verify_instruction">Just go to your email inbox (also look in your junk mail or spam folder), look out for the email, and click on the confirmation link. Then your all set!</string>
+    <string name="resend">RESEND</string>
+    <string name="not_receiving_email">Not Receiving an Email?</string>
     <string name="otp_sent_to">A One Time Password (OTP) has been sent to</string>
     <string name="submit">Submit</string>
     <string name="resend_otp">Resend OTP</string>

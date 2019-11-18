@@ -146,8 +146,8 @@ public interface BaseApiService {
     Call<EditUserResponse> editUser(
             @Header("Authorization") String authToken,
             @Field("email") String email,
-            @Field("no_telepon") String phone,
-            @Field("tanggal_lahir") String birthDate);
+            @Field("phone_number") String phone,
+            @Field("date_of_birth") String birthDate);
 
     @FormUrlEncoded
     @PUT("edit-bank")

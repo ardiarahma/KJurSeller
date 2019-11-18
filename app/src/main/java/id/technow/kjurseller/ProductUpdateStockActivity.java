@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -93,6 +94,12 @@ public class ProductUpdateStockActivity extends AppCompatActivity {
             dialog.setCancelable(false);
             dialog.setContentView(R.layout.dialog_no_internet);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            DisplayMetrics metrics = getResources().getDisplayMetrics();
+            int width = metrics.widthPixels;
+            int height = metrics.heightPixels;
+
+            dialog.getWindow().setLayout((9 * width) / 10, height);
 
             Button btnRetry = dialog.findViewById(R.id.btnRetry);
             btnRetry.setOnClickListener(new View.OnClickListener() {

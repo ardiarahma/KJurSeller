@@ -24,11 +24,15 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.technow.kjurseller.api.RetrofitClient;
@@ -45,7 +49,8 @@ import retrofit2.Response;
 public class SettingsProfileActivity extends AppCompatActivity {
     private EditText edtSEmail, edtSPhone;
     private TextView edtSBirth, btnEditPic;
-    private CircleImageView imgProfile;;
+    private CircleImageView imgProfile;
+    ;
     private int pYear, pMonth, pDay;
     private static final int REQUEST_CHOOSE_IMAGE = 3;
     private Button btnConfirm;
@@ -97,19 +102,19 @@ public class SettingsProfileActivity extends AppCompatActivity {
 
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         pYear = year;
-                        pMonth = monthOfYear+1;
+                        pMonth = monthOfYear + 1;
                         pDay = dayOfMonth;
 
                         String fm = "" + pMonth;
                         String fd = "" + pDay;
-                        if(pMonth < 10){
+                        if (pMonth < 10) {
                             fm = "0" + pMonth;
                         }
-                        if (pDay < 10){
+                        if (pDay < 10) {
                             fd = "0" + pDay;
                         }
 
-                        edtSBirth.setText(pYear+"-"+fm+"-"+fd);
+                        edtSBirth.setText(pYear + "-" + fm + "-" + fd);
                     }
                 };
                 DatePickerDialog dialog = new DatePickerDialog(mContext, pDateSetListener, pYear, pMonth, pDay);
@@ -130,8 +135,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         detailUser();
@@ -183,6 +187,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
             }
         }
     }
+
     public String imgToString() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String filePath = imgValue.getPath();
@@ -194,7 +199,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
     }
 
     public void uploadFoto() {
-      //  loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
+        //  loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         String accept = "application/json";
         User user = SharedPrefManager.getInstance(this).getUser();
         String token = user.getToken();
@@ -236,6 +241,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     private void detailUser() {
         String accept = "application/json";
 
@@ -335,13 +341,34 @@ public class SettingsProfileActivity extends AppCompatActivity {
                         Toast.makeText(mContext, "Profiles updated", Toast.LENGTH_LONG).show();
                         if (editUserResponse.getDetailUser().getEmailVerifyAt() == null) {
                             String emailSend = editUserResponse.getDetailUser().getEmail();
-                           /* Intent intent = new Intent(SettingsProfileActivity.this, VerifyEmailActivity.class);
+                            Intent intent = new Intent(SettingsProfileActivity.this, VerifyEmailActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra("email" , emailSend);
-                            startActivity(intent);*/
+                            intent.putExtra("email", emailSend);
+                            intent.putExtra("fromSettings", 1);
+                            startActivity(intent);
                         } else {
                             SettingsProfileActivity.this.finish();
                         }
+                    }
+                } else {
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject jsonObject = new JSONObject(errorBody.trim());
+                        jsonObject = jsonObject.getJSONObject("errors");
+                        Iterator<String> keys = jsonObject.keys();
+                        StringBuilder errors = new StringBuilder();
+                        String separator = "";
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            JSONArray arr = jsonObject.getJSONArray(key);
+                            for (int i = 0; i < arr.length(); i++) {
+                                errors.append(separator).append(key).append(" : ").append(arr.getString(i));
+                                separator = "\n";
+                            }
+                        }
+                        Toast.makeText(mContext, errors.toString(), Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }

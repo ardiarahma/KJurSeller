@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -107,6 +108,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                             dialog.setContentView(R.layout.dialog_update_app);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
+                            DisplayMetrics metrics = getResources().getDisplayMetrics();
+                            int width = metrics.widthPixels;
+                            int height = metrics.heightPixels;
+
+                            dialog.getWindow().setLayout((9 * width) / 10, height);
+
                             Button btnUpdate = dialog.findViewById(R.id.btnUpdate);
                             btnUpdate.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -152,13 +159,19 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void checkConnection() {
         if (isNetworkAvailable()) {
-            checkLogin();
+            checkVersion();
         } else {
             final Dialog dialog = new Dialog(mContext);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCancelable(false);
             dialog.setContentView(R.layout.dialog_no_internet);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            DisplayMetrics metrics = getResources().getDisplayMetrics();
+            int width = metrics.widthPixels;
+            int height = metrics.heightPixels;
+
+            dialog.getWindow().setLayout((9 * width) / 10, height);
 
             Button btnRetry = dialog.findViewById(R.id.btnRetry);
             btnRetry.setOnClickListener(new View.OnClickListener() {

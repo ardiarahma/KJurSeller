@@ -9,6 +9,8 @@ import android.widget.TextView;
 import id.technow.kjurseller.R;
 import id.technow.kjurseller.model.WalletLog;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class WalletHistoryAdapter extends RecyclerView.Adapter<WalletHistoryAdapter.CustomViewHolder>{
@@ -30,11 +32,19 @@ public class WalletHistoryAdapter extends RecyclerView.Adapter<WalletHistoryAdap
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         WalletLog walletLog = walletLogs.get(position);
+
+        DecimalFormat fmt = new DecimalFormat();
+        DecimalFormatSymbols fmts = new DecimalFormatSymbols();
+        fmts.setGroupingSeparator('.');
+        fmt.setGroupingSize(3);
+        fmt.setGroupingUsed(true);
+        fmt.setDecimalFormatSymbols(fmts);
+
         holder.txtRef.setText(String.valueOf(walletLog.getReferenceId()));
         holder.txtDateTime.setText(walletLog.getDateTime());
-        holder.txtTotal.setText(String.valueOf(walletLog.getTotal()));
+        holder.txtTotal.setText(String.valueOf(fmt.format(walletLog.getTotal())));
         holder.txtType.setText(walletLog.getType());
-        holder.txtBalance.setText(String.valueOf(walletLog.getGrandTotal()));
+        holder.txtBalance.setText(String.valueOf(fmt.format(walletLog.getGrandTotal())));
     }
 
     @Override

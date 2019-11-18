@@ -41,13 +41,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_14sdp"
             android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
             android:fontFamily="@font/roboto_medium"
-            android:text="@string/otp_sent_to"
+            android:text="@string/please_verify"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/we_sent_to"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
 
         <TextView
             android:id="@+id/txtEmail"
@@ -56,64 +67,31 @@
             android:fontFamily="@font/roboto_medium"
             android:text="email***@***.com"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_11ssp" />
 
-        <com.chaos.view.PinView
-            android:id="@+id/edtPinView"
-            style="@style/PinWidget.PinView"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="@string/verify_instruction"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
-            android:gravity="center_horizontal"
-            android:hint="------"
-            android:inputType="number"
-            android:padding="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/not_receiving_email"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"
-            app:cursorColor="@color/white"
-            app:cursorWidth="@dimen/_1sdp"
-            app:hideLineWhenFilled="true"
-            app:itemCount="6"
-            app:itemHeight="@dimen/_45sdp"
-            app:itemRadius="@dimen/_2sdp"
-            app:itemSpacing="0dp"
-            app:itemWidth="@dimen/_45sdp"
-            app:lineColor="@color/white"
-            app:viewType="none" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etOTP"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:inputType="numberPassword"
-            android:maxLength="6"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:visibility="gone"
-            app:backgroundTint="@color/white" />
-
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_18sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/btn_rounded_white"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/submit"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:visibility="gone" />
+            android:textSize="@dimen/_13ssp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_25sdp"
             android:orientation="horizontal">
 
             <TextView
@@ -123,12 +101,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/resend_otp"
+                android:text="@string/resend"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
             <LinearLayout
-                android:id="@+id/timer"
+                android:id="@+id/layoutTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"

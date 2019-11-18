@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -83,8 +84,8 @@ public class SettingsActivity extends AppCompatActivity {
         String version = pInfo.versionName;
         txtVersion.setText(version);
 
-        Button llLogOut = this.findViewById(R.id.btnLogout);
-        llLogOut.setOnClickListener(new View.OnClickListener() {
+        Button btnLogout = this.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmLogOut();
@@ -105,6 +106,12 @@ public class SettingsActivity extends AppCompatActivity {
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_logout);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+        dialog.getWindow().setLayout((9 * width) / 10, (2 * height) / 5);
 
         Button btnNo = dialog.findViewById(R.id.btnNo);
         btnNo.setOnClickListener(new View.OnClickListener() {

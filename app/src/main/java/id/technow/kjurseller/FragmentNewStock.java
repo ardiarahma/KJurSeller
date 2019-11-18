@@ -214,7 +214,7 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
                         mBottomSheetBehavior.setHideable(true);
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     } else {
-                        Toast.makeText(mContext, "Can't open on the same day.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, newStockResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }

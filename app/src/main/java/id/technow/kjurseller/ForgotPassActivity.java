@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -63,11 +64,10 @@ public class ForgotPassActivity extends AppCompatActivity {
             }
         });
 
-        FrameLayout btnForgotPass = this.findViewById(R.id.btnForgotPass);
-        btnForgotPass.setOnClickListener(new View.OnClickListener() {
+        Button btnResetPass = this.findViewById(R.id.btnResetPass);
+        btnResetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
                 fpUser();
             }
         });
@@ -82,6 +82,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     }
 
     private void fpUser() {
+        loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         String accept = "application/json";
         String email = etEmail.getText().toString().trim();
 

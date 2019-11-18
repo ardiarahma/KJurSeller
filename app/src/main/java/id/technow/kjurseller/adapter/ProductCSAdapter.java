@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +106,12 @@ public class ProductCSAdapter extends RecyclerView.Adapter<ProductCSAdapter.Cust
             dialog.setCancelable(true);
             dialog.setContentView(R.layout.dialog_close_store_item);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+            int width = metrics.widthPixels;
+            int height = metrics.heightPixels;
+
+            dialog.getWindow().setLayout((9 * width) / 10, (2 * height) / 5);
 
             Button btnNo = dialog.findViewById(R.id.btnNo);
             btnNo.setOnClickListener(new View.OnClickListener() {
