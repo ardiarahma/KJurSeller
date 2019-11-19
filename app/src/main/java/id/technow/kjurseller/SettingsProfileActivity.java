@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,7 +53,8 @@ public class SettingsProfileActivity extends AppCompatActivity {
     private EditText edtSEmail, edtSPhone;
     private TextView edtSBirth, btnEditPic;
     private CircleImageView imgProfile;
-    ;
+    private Bitmap bitmap, dstBmp;
+    private static final int IMG_REQUEST = 777;
     private int pYear, pMonth, pDay;
     private static final int REQUEST_CHOOSE_IMAGE = 3;
     private Button btnConfirm;
@@ -85,9 +89,11 @@ public class SettingsProfileActivity extends AppCompatActivity {
         btnEditPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EasyImage.openChooserWithGallery(SettingsProfileActivity.this, "Choose Picture",
+                selectImage();
+
+                /*        EasyImage.openChooserWithGallery(SettingsProfileActivity.this, "Choose Picture",
                         REQUEST_CHOOSE_IMAGE);
-            }
+        */    }
         });
 
         edtSBirth.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +143,66 @@ public class SettingsProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
+        //loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         detailUser();
     }
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMG_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri path = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
+                if (bitmap.getWidth() >= bitmap.getHeight()) {
+
+                    dstBmp = Bitmap.createBitmap(
+                            bitmap,
+                            bitmap.getWidth() / 2 - bitmap.getHeight() / 2,
+                            0,
+                            bitmap.getHeight(),
+                            bitmap.getHeight()
+                    );
+
+                } else {
+                    dstBmp = Bitmap.createBitmap(
+                            bitmap,
+                            0,
+                            bitmap.getHeight() / 2 - bitmap.getWidth() / 2,
+                            bitmap.getWidth(),
+                            bitmap.getWidth()
+                    );
+                }
+                Picasso.get()
+                        .load(String.valueOf(new BitmapDrawable(bitmap)))
+                        .error(R.drawable.ic_close)
+                        .resize(500, 500)
+                        .centerInside()
+                        .noFade()
+                        .into(imgProfile);
+                // frame.setBackground(new BitmapDrawable(bitmap));
+                // uploadProfile.setVisibility(View.VISIBLE);
+                uploadFoto();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public String imgToString() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        dstBmp.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        //    bt_uploadFoto.setEnabled(true);
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
@@ -197,9 +259,10 @@ public class SettingsProfileActivity extends AppCompatActivity {
         //    bt_uploadFoto.setEnabled(true);
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
+*/
 
     public void uploadFoto() {
-        //  loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
+        loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         String accept = "application/json";
         User user = SharedPrefManager.getInstance(this).getUser();
         String token = user.getToken();
@@ -210,8 +273,8 @@ public class SettingsProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(retrofit2.Call<EditUserResponse> call, Response<EditUserResponse> response) {
                 if (response.isSuccessful()) {
-                    loading.dismiss();
                     Toast.makeText(SettingsProfileActivity.this, "Succes Uploading Profile Picture", Toast.LENGTH_LONG).show();
+                    loading.dismiss();
                 } else {
                     loading.dismiss();
                     Toast.makeText(SettingsProfileActivity.this, "Failed Uploading Profile Picture", Toast.LENGTH_LONG).show();

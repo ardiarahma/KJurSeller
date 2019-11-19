@@ -47,6 +47,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         mContext = this;
 
+        LinearLayout btnTermCondition = this.findViewById(R.id.btnTermCondition);
+        btnTermCondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toc = new Intent(SettingsActivity.this, WebViewActivity.class);
+                toc.putExtra("BannerLink", "k-jur.technow.id/privacy");
+                startActivity(toc);
+            }
+        });
         LinearLayout btnProfile = this.findViewById(R.id.btnProfile);
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
