@@ -143,7 +143,6 @@ public class SettingsProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         detailUser();
     }
     private void selectImage() {
@@ -275,13 +274,20 @@ public class SettingsProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(SettingsProfileActivity.this, "Succes Uploading Profile Picture", Toast.LENGTH_LONG).show();
                     loading.dismiss();
+                    Picasso.get()
+                            .load(response.body().getDetailUser().getPic())
+                            .error(R.drawable.ic_user)
+                            .resize(500, 500)
+                            .centerInside()
+                            .noFade()
+                            .into(imgProfile);
                 } else {
                     loading.dismiss();
                     Toast.makeText(SettingsProfileActivity.this, "Failed Uploading Profile Picture", Toast.LENGTH_LONG).show();
                     // Toast.makeText(SettingsProfileActivity.this, response.errorBody().toString(), Toast.LENGTH_LONG).show();
                     Picasso.get()
-                            .load(avatar)
-                            .error(R.drawable.ic_user)
+                            .load(String.valueOf(new BitmapDrawable(bitmap)))
+                            .error(R.drawable.ic_close)
                             .resize(500, 500)
                             .centerInside()
                             .noFade()
@@ -306,8 +312,8 @@ public class SettingsProfileActivity extends AppCompatActivity {
     }
 
     private void detailUser() {
+       // loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
         String accept = "application/json";
-
         User user = SharedPrefManager.getInstance(this).getUser();
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String token = user.getToken();
@@ -320,11 +326,18 @@ public class SettingsProfileActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<DetailUserResponse> call, Response<DetailUserResponse> response) {
-                loading.dismiss();
+               // loading.dismiss();
                 btnConfirm.setEnabled(true);
                 if (response.isSuccessful()) {
                     DetailUserResponse detailUserResponse = response.body();
                     if (detailUserResponse.getStatus().equals("success")) {
+                        Picasso.get()
+                                .load(detailUserResponse.getDetailUser().getPic())
+                                .error(R.drawable.ic_user)
+                                .resize(500, 500)
+                                .centerInside()
+                                .noFade()
+                                .into(imgProfile);
                         edtSEmail.setText(detailUserResponse.getDetailUser().getEmail());
                         edtSPhone.setText(detailUserResponse.getDetailUser().getPhone());
                         if (detailUserResponse.getDetailUser().getBirthDate() != null) {
@@ -338,7 +351,7 @@ public class SettingsProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DetailUserResponse> call, Throwable t) {
-                loading.dismiss();
+               // loading.dismiss();
                 btnConfirm.setEnabled(false);
                 Toast.makeText(mContext, "Can't get user information. Try again later", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "Response = " + t.toString());
