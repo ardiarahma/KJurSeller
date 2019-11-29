@@ -114,7 +114,9 @@ public class ForgotPassActivity extends AppCompatActivity {
                         Log.i("debug", "onResponse: SUCCESS");
                         loading.dismiss();
                         Toast.makeText(mContext, forgotPasswordResponse.getMessage(), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(mContext, LoginActivity.class));
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 } else {
                     try {

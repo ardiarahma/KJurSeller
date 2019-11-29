@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:tint="@color/dark_slate_gray"
-        app:srcCompat="@drawable/ic_back_black_24dp" />
+        android:src="@drawable/ic_back_black_24dp" />
 
     <TextView
         android:id="@+id/toolbarTitle"
@@ -22,9 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_3sdp"
         android:fontFamily="@font/maven_pro_regular"
-        android:text="Browser"
         android:textColor="@color/dark_slate_gray"
-        android:textSize="@dimen/_19ssp"
+        android:textSize="@dimen/_15ssp"
         android:textStyle="bold" />
 
 </android.support.v7.widget.Toolbar>

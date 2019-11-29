@@ -3,6 +3,7 @@ package id.technow.kjurseller;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -73,6 +74,14 @@ public class LocOpenStoreActivity extends AppCompatActivity {
         super.onResume();
         loading = ProgressDialog.show(LocOpenStoreActivity.this, null, getString(R.string.please_wait), true, false);
         checkConnection();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(LocOpenStoreActivity.this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     private boolean isNetworkAvailable() {

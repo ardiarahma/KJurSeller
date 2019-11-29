@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import id.technow.kjurseller.api.RetrofitClient;
@@ -119,6 +120,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
+                                    SplashScreenActivity.this.finish();
                                     final String appPackageName = getPackageName();
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
@@ -128,7 +130,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 }
                             });
 
-                            Button btnUpdateLater = dialog.findViewById(R.id.btnUpdateLater);
+                            TextView btnUpdateLater = dialog.findViewById(R.id.btnUpdateLater);
                             btnUpdateLater.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

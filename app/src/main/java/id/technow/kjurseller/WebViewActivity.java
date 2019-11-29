@@ -41,10 +41,9 @@ public class WebViewActivity extends AppCompatActivity {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            if(view.getTitle().length() > 15){
-                String title = view.getTitle().substring(0, 15) + "....";
+            if(view.getTitle().length() > 20){
+                String title = view.getTitle().substring(0, 20) + "....";
                 toolbarTitle.setText(title);
-
             }else {
                 toolbarTitle.setText(view.getTitle());
             }

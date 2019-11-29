@@ -41,6 +41,9 @@ public class LiveSalesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(LiveSalesActivity.this, MainActivity.class));
+        Intent i = new Intent(LiveSalesActivity.this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }

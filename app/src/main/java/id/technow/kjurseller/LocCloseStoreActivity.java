@@ -114,8 +114,9 @@ public class LocCloseStoreActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(LocCloseStoreActivity.this, MainActivity.class);
-        LocCloseStoreActivity.this.finish();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     private void locToday() {
