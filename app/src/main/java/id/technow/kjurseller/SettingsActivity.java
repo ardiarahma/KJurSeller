@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,6 +80,16 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, SettingsChangePassActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout btnLanguages= this.findViewById(R.id.btnLanguages);
+        btnLanguages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+//                Intent intent = new Intent(SettingsActivity.this, SettingsLanguagesActivity.class);
                 startActivity(intent);
             }
         });

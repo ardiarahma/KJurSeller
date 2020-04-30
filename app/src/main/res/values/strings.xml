@@ -49,6 +49,7 @@
     <string name="close_all"><u>Close All</u></string>
     <string name="are_you_sure_close_store">Are you sure you want to close your store in </string>
     <string name="are_you_sure_close_item">Are you sure you want to close your product </string>
+    <string name="are_you_sure_change">Are you sure you want to change </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="terms_condition">Terms and Conditions</string>
