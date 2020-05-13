@@ -2,31 +2,38 @@ package id.technow.kjurseller;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.design.widget.CoordinatorLayout;
+import android.os.Build;
+import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-
+import androidx.core.app.NotificationCompat;
 import id.technow.kjurseller.api.RetrofitClient;
 import id.technow.kjurseller.model.User;
 import id.technow.kjurseller.storage.SharedPrefManager;
@@ -35,6 +42,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class FragmentNewStock extends BottomSheetDialogFragment {
     Integer i = 1;
     private Button btnConfirm;
@@ -42,6 +52,10 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
     Context mContext;
     ProgressDialog loading;
     private BottomSheetBehavior mBottomSheetBehavior;
+    private NotificationManager notificationManager;
+    private static final int NOTIFICAION_ID = 0;
+    private static final String CHANNEL_ID = "ch_1";
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -52,6 +66,8 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
         dialog.setContentView(view);
 
         mContext = getActivity();
+//        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
 
         String productName = getArguments().getString("productName");
         String productPic = getArguments().getString("productPic");
@@ -79,6 +95,7 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 loading = ProgressDialog.show(mContext, null, getString(R.string.please_wait), true, false);
                 newStock();
+                createNotificationChannel();
             }
         });
 
@@ -170,6 +187,37 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
         }
     }
 
+    private void createNotificationChannel() {
+        notificationManager = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, "Channel101",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setDescription("What is this?");
+            notificationChannel.enableLights(true);
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        Intent intent = new Intent(mContext, MainActivity.class);
+        PendingIntent notifPendingIntent = PendingIntent.getActivity(mContext, NOTIFICAION_ID,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
+                .setContentTitle("K-Jur Seller")
+                .setContentText("Store is open now!")
+                .setContentIntent(notifPendingIntent)
+                .setSmallIcon(R.drawable.logo)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setOngoing(true)
+                .setAutoCancel(true)
+                .addAction(R.drawable.logo, "Go to apps to close", notifPendingIntent);
+        Notification notification = notifBuilder.build();
+//        notification.flags = Notification.FLAG_NO_CLEAR;
+        notificationManager.notify(NOTIFICAION_ID, notification);
+
+    }
+
     private void newStock() {
         String stockTxt = edtStock.getText().toString().trim();
         String priceTxt = edtPrice.getText().toString().trim();
@@ -207,9 +255,15 @@ public class FragmentNewStock extends BottomSheetDialogFragment {
                 if (response.isSuccessful()) {
                     NewStockResponse newStockResponse = response.body();
                     if (newStockResponse.getStatus().equals("success")) {
-                        Toast.makeText(mContext, "Success", Toast.LENGTH_LONG).show();
+                        createNotificationChannel();
+//                        notificationManager = getSystemService
+//                        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(mContext)
+//                                .setContentTitle(String.valueOf(R.string.notif_title))
+//                                .setContentText(String.valueOf(R.string.notif_content))
+//                                .setSmallIcon(R.drawable.logo);
                         if (mContext instanceof ProductOpenStoreActivity) {
                             ((ProductOpenStoreActivity) mContext).checkConnection();
+
                         }
                         mBottomSheetBehavior.setHideable(true);
                         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);

@@ -83,4 +83,7 @@
     <string name="submit">Submit</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="test">The quick brown fox jumps overs the lazy dog</string>
+    <string name="notif_title">K-Jur</string>
+    <string name="title_activity_maps">Location</string>
+    <!--    <string name="notif_content">Store is open now! Don't forget to close the store.</string>-->
 </resources>

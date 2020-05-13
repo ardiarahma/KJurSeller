@@ -20,11 +20,23 @@ public class Location {
     @Expose
     private String pic;
 
-    public Location(int id, String nama, String desc, String pic) {
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+
+
+
+    public Location(int id, String nama, String desc, String pic, String longitude, String latitude) {
         this.id = id;
         this.nama = nama;
         this.desc = desc;
         this.pic = pic;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public int getId() {
@@ -57,5 +69,21 @@ public class Location {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

@@ -84,4 +84,6 @@
     <string name="top_up">Isi Ulang</string>
     <string name="verify_instruction">Buka kotak masuk email Anda (lihat juga folder junk mail atau spam), cari emailnya, dan klik tautan konfirmasi. Maka semua sudah siap!</string>
     <string name="are_you_sure_change">Apakah Anda yakin ingin perubahan</string>
+    <string name="notif_content">Toko terbuka!  Jangan lupa untuk menutup toko ya.</string>
+    <string name="notif_title">K-Jur</string>
 </resources>

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="id.technow.kjurseller.SettingsChangePassActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_settings_change_pass" />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <View
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtOldPass"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edtNewPass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edtNewConfirmPass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
