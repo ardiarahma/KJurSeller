@@ -85,5 +85,12 @@
     <string name="test">The quick brown fox jumps overs the lazy dog</string>
     <string name="notif_title">K-Jur</string>
     <string name="title_activity_maps">Location</string>
+    <string name="os_string">Open your store today</string>
+    <string name="us_string">Update stock and watch transaction on your store today</string>
+    <string name="cs_string">Close your store today</string>
+    <string name="report_string">View your transaction report</string>
+    <string name="contact_string">View your transaction report</string>
+    <string name="notif_content">Store is open! don\'t forget to close.</string>
+    <string name="choose_loc">Choose Store Location</string>
     <!--    <string name="notif_content">Store is open now! Don't forget to close the store.</string>-->
 </resources>

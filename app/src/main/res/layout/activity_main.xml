@@ -269,7 +269,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_light"
-                                    android:text="Open your store today"
+                                    android:text="@string/os_string"
                                     android:textColor="@color/dark_slate_gray"
                                     android:textSize="@dimen/_12ssp" />
                             </LinearLayout>
@@ -314,7 +314,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_light"
-                                    android:text="Update stock and watch transaction on your store today"
+                                    android:text="@string/us_string"
                                     android:textColor="@color/dark_slate_gray"
                                     android:textSize="@dimen/_12ssp" />
                             </LinearLayout>
@@ -359,7 +359,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_light"
-                                    android:text="Close your store today"
+                                    android:text="@string/cs_string"
                                     android:textColor="@color/dark_slate_gray"
                                     android:textSize="@dimen/_12ssp" />
                             </LinearLayout>
@@ -418,7 +418,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_light"
-                                    android:text="View your transaction report"
+                                    android:text="@string/report_string"
                                     android:textColor="@color/dark_slate_gray"
                                     android:textSize="@dimen/_12ssp" />
                             </LinearLayout>
@@ -476,7 +476,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_light"
-                                    android:text="Let us know if you have a problem"
+                                    android:text="@string/contact_string"
                                     android:textColor="@color/dark_slate_gray"
                                     android:textSize="@dimen/_12ssp" />
                             </LinearLayout>

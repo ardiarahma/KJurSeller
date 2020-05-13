@@ -86,4 +86,11 @@
     <string name="are_you_sure_change">Apakah Anda yakin ingin perubahan</string>
     <string name="notif_content">Toko terbuka!  Jangan lupa untuk menutup toko ya.</string>
     <string name="notif_title">K-Jur</string>
+    <string name="title_activity_maps">Lokasi</string>
+    <string name="us_string">Perbarui stok dan lihat transaksi Anda hari ini</string>
+    <string name="report_string">Lihat laporan transaksi</string>
+    <string name="os_string">Buka toko Anda hari ini</string>
+    <string name="cs_string">Tutup toko Anda hari ini</string>
+    <string name="contact_string">Beri tahu kami jika Anda memiliki masalah</string>
+    <string name="choose_loc">Pilih lokasi toko</string>
 </resources>

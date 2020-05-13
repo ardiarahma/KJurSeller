@@ -48,7 +48,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Choose Store Location"
+                    android:text="@string/choose_loc"
                     android:textColor="@color/dark_slate_gray"
                     android:textSize="@dimen/_11ssp" />
 
